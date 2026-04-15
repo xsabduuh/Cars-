@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="EliteDrive - كراء سيارات فاخرة في المغرب. أفضل العروض والأسعار بالدرهم المغربي.">
-  <title>EliteDrive | كراء السيارات الفاخرة</title>
+  <meta name="description" content="EliteDrive - تجربة كراء سيارات فاخرة في المغرب. تشكيلة حصرية، أسعار تنافسية بالدرهم المغربي.">
+  <title>EliteDrive | كراء سيارات فاخرة - المغرب</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -16,42 +16,63 @@
 
     body {
       font-family: 'Cairo', sans-serif;
-      background: #f0f4f8; /* لون خلفية رمادي فاتح مائل للأزرق */
-      color: #1a2a3a;
+      background: #f8fafc;
+      color: #1e293b;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     /* تخصيص شريط التمرير */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb { background: #2c3e66; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #f39c12, #e67e22); border-radius: 10px; }
 
-    /* الحاوية الداخلية للمحتوى (لكن الخلفيات تمتد بعرض كامل) */
+    /* الحاويات */
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
-    /* كل قسم يأخذ عرض كامل */
     section {
       width: 100%;
       padding: 5rem 0;
+      position: relative;
+    }
+
+    /* أنيميشن الخلفية المتدرجة لبعض الأقسام */
+    .section-bg-glow {
+      position: relative;
+      overflow: hidden;
+    }
+    .section-bg-glow::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(243,156,18,0.03), transparent 70%);
+      pointer-events: none;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
     }
     .section-header h2 {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 800;
       position: relative;
       display: inline-block;
-      color: #0a2540;
+      color: #0f172a;
+      letter-spacing: -0.5px;
     }
     .section-header h2 span {
-      color: #e67e22; /* برتقالي ذهبي */
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
     }
     .section-header h2::after {
       content: '';
@@ -59,59 +80,63 @@
       bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 70px;
-      height: 3px;
-      background: #e67e22;
-      border-radius: 3px;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #f39c12, #e67e22);
+      border-radius: 4px;
     }
 
-    /* الأزرار */
+    /* أزرار متطورة */
     .btn-primary {
-      background: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
       color: white;
-      padding: 12px 28px;
-      border-radius: 40px;
+      padding: 12px 32px;
+      border-radius: 50px;
       font-weight: 700;
       border: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       display: inline-block;
       text-decoration: none;
+      box-shadow: 0 4px 12px rgba(243,156,18,0.3);
     }
     .btn-primary:hover {
-      background: #d35400;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(243,156,18,0.4);
+      background: linear-gradient(135deg, #e67e22, #d35400);
     }
     .btn-outline {
       background: transparent;
-      border: 2px solid #e67e22;
-      color: #e67e22;
-      padding: 10px 26px;
-      border-radius: 40px;
+      border: 2px solid #f39c12;
+      color: #f39c12;
+      padding: 10px 28px;
+      border-radius: 50px;
       font-weight: 700;
       transition: 0.3s;
       text-decoration: none;
+      backdrop-filter: blur(2px);
     }
     .btn-outline:hover {
-      background: #e67e22;
+      background: #f39c12;
       color: white;
       transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(243,156,18,0.2);
     }
 
-    /* ========== شريط التنقل (ثابت) ========== */
+    /* ========== NAVBAR ========== */
     .navbar {
-      background: #ffffff;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
       padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 1000;
-      transition: box-shadow 0.3s;
-      width: 100%;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      transition: all 0.3s;
+      border-bottom: 1px solid rgba(243,156,18,0.1);
     }
     .navbar.scrolled {
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      background: rgba(255,255,255,0.98);
     }
     .nav-container {
       display: flex;
@@ -121,13 +146,19 @@
       margin: 0 auto;
     }
     .logo a {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 900;
-      color: #0a2540;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
       text-decoration: none;
     }
     .logo span {
-      color: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
     }
     .nav-menu {
       display: flex;
@@ -136,28 +167,42 @@
     }
     .nav-menu a {
       text-decoration: none;
-      color: #2c3e50;
+      color: #334155;
       font-weight: 600;
       transition: 0.3s;
+      position: relative;
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #f39c12, #e67e22);
+      transition: width 0.3s;
+    }
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after {
+      width: 100%;
     }
     .nav-menu a:hover {
-      color: #e67e22;
+      color: #f39c12;
     }
     .btn-book-nav {
-      background: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
       color: white !important;
-      padding: 0.5rem 1.4rem;
+      padding: 0.5rem 1.5rem;
       border-radius: 40px;
     }
-    .btn-book-nav:hover {
-      background: #d35400;
+    .btn-book-nav::after {
+      display: none;
     }
-    /* زر القائمة للجوال مع أنيميشن */
     .nav-toggle {
       display: none;
       font-size: 1.6rem;
       cursor: pointer;
-      color: #0a2540;
+      color: #0f172a;
       transition: transform 0.3s ease;
     }
     .nav-toggle.active {
@@ -166,8 +211,21 @@
 
     /* ========== HERO ========== */
     .hero {
-      background: linear-gradient(135deg, #ffffff 0%, #eef2f9 100%);
+      background: linear-gradient(125deg, #ffffff 0%, #f1f5f9 100%);
       padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(243,156,18,0.08), transparent);
+      border-radius: 50%;
+      pointer-events: none;
     }
     .hero .container {
       display: flex;
@@ -178,47 +236,56 @@
     }
     .hero-content {
       flex: 1;
+      animation: fadeInUp 0.8s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .hero-content h1 {
-      font-size: 3.2rem;
+      font-size: 3.5rem;
       font-weight: 800;
+      line-height: 1.2;
       margin-bottom: 1rem;
-      color: #0a2540;
     }
     .hero-content h1 span {
-      color: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
     }
     .hero-content p {
       font-size: 1.1rem;
+      color: #475569;
       margin-bottom: 2rem;
-      color: #5a6874;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
     }
     .hero-image {
       flex: 1;
       text-align: center;
+      animation: fadeInUp 0.8s ease 0.2s backwards;
     }
     .hero-image img {
       max-width: 100%;
-      border-radius: 32px;
-      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+      border-radius: 40px;
+      box-shadow: 0 30px 40px -20px rgba(0,0,0,0.2);
+      transition: transform 0.5s;
+    }
+    .hero-image img:hover {
+      transform: scale(1.02);
     }
 
-    /* ========== البحث ========== */
+    /* ========== SEARCH ========== */
     .search-section {
-      background: #f0f4f8;
+      background: #f8fafc;
       padding-top: 0;
     }
     .search-card {
-      background: white;
-      border-radius: 32px;
-      padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 40px;
+      padding: 2.2rem;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+      border: 1px solid rgba(243,156,18,0.2);
     }
     .search-form {
       display: grid;
@@ -233,24 +300,31 @@
       position: absolute;
       right: 15px;
       top: 42px;
-      color: #e67e22;
+      color: #f39c12;
+      font-size: 1.1rem;
     }
     .input-group label {
       display: block;
       font-weight: 600;
       margin-bottom: 6px;
-      color: #2c3e50;
+      color: #1e293b;
     }
     .input-group input, .input-group select {
       width: 100%;
-      padding: 12px 16px 12px 40px;
+      padding: 12px 40px 12px 16px;
       border: 1px solid #e2e8f0;
-      border-radius: 20px;
+      border-radius: 28px;
       font-family: 'Cairo', sans-serif;
       background: white;
+      transition: all 0.2s;
+    }
+    .input-group input:focus, .input-group select:focus {
+      outline: none;
+      border-color: #f39c12;
+      box-shadow: 0 0 0 3px rgba(243,156,18,0.1);
     }
     .btn-search {
-      background: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
       color: white;
       border: none;
       padding: 12px 24px;
@@ -258,12 +332,14 @@
       font-weight: 700;
       cursor: pointer;
       width: 100%;
+      transition: 0.3s;
     }
     .btn-search:hover {
-      background: #d35400;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(243,156,18,0.3);
     }
 
-    /* ========== العروض (أفقية) ========== */
+    /* ========== OFFERS (أفقي) ========== */
     .offers-section {
       background: #ffffff;
     }
@@ -272,30 +348,40 @@
       gap: 2rem;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding: 1rem 0.5rem;
+      padding: 1rem 0.5rem 2rem;
+      scrollbar-width: thin;
+    }
+    .offers-slider::-webkit-scrollbar {
+      height: 6px;
     }
     .offer-card {
       min-width: 280px;
       flex: 0 0 auto;
       scroll-snap-align: start;
-      background: #fef9e8;
-      border-radius: 28px;
+      background: linear-gradient(145deg, #fff8f0, #ffffff);
+      border-radius: 32px;
       padding: 2rem;
       text-align: center;
-      transition: 0.3s;
+      transition: all 0.4s;
+      border: 1px solid rgba(243,156,18,0.2);
     }
     .offer-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      border-color: #f39c12;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
     }
     .offer-icon {
-      font-size: 2.5rem;
-      color: #e67e22;
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
       margin-bottom: 1rem;
     }
 
-    /* ========== السيارات المميزة ========== */
+    /* ========== FEATURED CARS ========== */
     .featured-cars {
-      background: #f0f4f8;
+      background: #f8fafc;
     }
     .cars-grid {
       display: grid;
@@ -304,19 +390,25 @@
     }
     .car-card {
       background: white;
-      border-radius: 28px;
+      border-radius: 32px;
       overflow: hidden;
-      transition: all 0.3s;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      border: 1px solid #eef2f6;
     }
     .car-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      transform: translateY(-12px);
+      box-shadow: 0 25px 35px -12px rgba(0,0,0,0.15);
+      border-color: #f39c12;
     }
     .car-card img {
       width: 100%;
-      height: 210px;
+      height: 220px;
       object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .car-card:hover img {
+      transform: scale(1.03);
     }
     .car-info {
       padding: 1.5rem;
@@ -329,11 +421,11 @@
     .car-title h3 {
       font-size: 1.4rem;
       font-weight: 800;
-      color: #0a2540;
+      color: #0f172a;
     }
     .badge {
-      background: #fef3e2;
-      color: #e67e22;
+      background: linear-gradient(135deg, #fef3e2, #ffe8cc);
+      color: #f39c12;
       padding: 4px 12px;
       border-radius: 40px;
       font-size: 0.7rem;
@@ -341,21 +433,21 @@
     }
     .rating {
       margin: 0.5rem 0;
-      color: #e67e22;
-    }
-    .rating span {
-      color: #a0aec0;
-      margin-right: 5px;
+      color: #f39c12;
     }
     .price {
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       font-weight: 800;
-      color: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
       margin: 0.5rem 0;
     }
     .price small {
       font-size: 0.8rem;
       font-weight: normal;
+      color: #64748b;
     }
     .car-specs {
       display: flex;
@@ -366,11 +458,11 @@
     }
     .car-specs i {
       margin-left: 4px;
-      color: #e67e22;
+      color: #f39c12;
     }
     .free-cancel {
       font-size: 0.7rem;
-      color: #27ae60;
+      color: #10b981;
       margin-bottom: 1rem;
     }
     .car-actions {
@@ -389,24 +481,26 @@
     }
     .btn-details {
       background: #f1f5f9;
-      color: #e67e22;
+      color: #f39c12;
       border: 1px solid #e2e8f0;
     }
     .btn-details:hover {
       background: #fef3e2;
+      transform: translateY(-2px);
     }
     .btn-book-card {
-      background: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
       color: white;
     }
     .btn-book-card:hover {
-      background: #d35400;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(243,156,18,0.3);
     }
 
-    /* ========== لماذا نحن (تمرير أفقي) ========== */
+    /* ========== WHY US (أفقي) ========== */
     .why-us {
       background: #ffffff;
-      padding: 3rem 0;
+      position: relative;
     }
     .why-horizontal {
       display: flex;
@@ -416,39 +510,33 @@
       padding: 1rem 0.5rem;
     }
     .why-card-h {
-      min-width: 280px;
+      min-width: 270px;
       flex: 0 0 auto;
       scroll-snap-align: start;
-      background: #f8fafc;
-      border-radius: 28px;
+      background: #fefef8;
+      border-radius: 32px;
       padding: 2rem;
       text-align: center;
       transition: all 0.3s;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #f1f5f9;
     }
     .why-card-h:hover {
       transform: translateY(-8px);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.05);
-      border-color: #e67e22;
+      border-color: #f39c12;
+      box-shadow: 0 15px 25px rgba(243,156,18,0.08);
     }
     .why-card-h i {
       font-size: 2.8rem;
-      color: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
       margin-bottom: 1rem;
     }
-    .why-card-h h4 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      color: #0a2540;
-    }
-    .why-card-h p {
-      color: #5a6874;
-    }
 
-    /* ========== خطوات الحجز (بخطوط متصلة) ========== */
+    /* ========== BOOKING STEPS (خط متصل) ========== */
     .booking-steps {
-      background: #f0f4f8;
-      position: relative;
+      background: linear-gradient(145deg, #f8fafc, #ffffff);
     }
     .steps-container {
       display: flex;
@@ -463,7 +551,8 @@
       right: 10%;
       left: 10%;
       height: 3px;
-      background: #e67e22;
+      background: linear-gradient(90deg, #f39c12, #e67e22, #f39c12);
+      border-radius: 3px;
       z-index: 0;
     }
     .step-item {
@@ -474,27 +563,31 @@
       background: white;
       margin: 0 0.5rem;
       padding: 1.5rem;
-      border-radius: 28px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-radius: 32px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+      transition: 0.3s;
+    }
+    .step-item:hover {
+      transform: translateY(-5px);
     }
     .step-number {
-      width: 50px;
-      height: 50px;
-      background: #e67e22;
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 800;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: -2rem auto 1rem;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 15px rgba(243,156,18,0.3);
     }
 
-    /* ========== الأسئلة الشائعة (Accordion) ========== */
+    /* ========== FAQ (ACCORDION) ========== */
     .faq-section {
-      background: white;
+      background: #f8fafc;
     }
     .faq-grid {
       max-width: 800px;
@@ -502,28 +595,32 @@
     }
     .faq-item {
       background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 24px;
+      border-radius: 28px;
       margin-bottom: 1rem;
       overflow: hidden;
+      transition: 0.2s;
+      border: 1px solid #eef2f6;
     }
     .faq-question {
-      padding: 1.2rem 1.5rem;
+      padding: 1.2rem 1.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
       font-weight: 700;
-      color: #0a2540;
+      color: #0f172a;
     }
     .faq-question i {
-      color: #e67e22;
+      color: #f39c12;
       transition: transform 0.3s;
     }
     .faq-answer {
-      padding: 0 1.5rem 1.2rem;
+      padding: 0 1.8rem 1.5rem;
       color: #5a6874;
       display: none;
+    }
+    .faq-item.active {
+      border-color: #f39c12;
     }
     .faq-item.active .faq-answer {
       display: block;
@@ -532,9 +629,9 @@
       transform: rotate(180deg);
     }
 
-    /* ========== قسم التواصل ========== */
+    /* ========== CONTACT ========== */
     .contact-section {
-      background: #f0f4f8;
+      background: #ffffff;
     }
     .contact-wrapper {
       display: flex;
@@ -548,37 +645,47 @@
       gap: 1rem;
     }
     .info-card {
-      background: white;
+      background: #f8fafc;
       padding: 1.2rem;
-      border-radius: 24px;
+      border-radius: 28px;
       display: flex;
       align-items: center;
       gap: 1rem;
+      transition: 0.3s;
+    }
+    .info-card:hover {
+      transform: translateX(-5px);
+      background: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
     }
     .info-card i {
       font-size: 1.8rem;
-      color: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
     }
     .contact-form {
       flex: 2;
-      background: white;
+      background: #f8fafc;
       padding: 2rem;
-      border-radius: 28px;
+      border-radius: 32px;
     }
     .form-group {
       margin-bottom: 1rem;
     }
     .form-group input, .form-group textarea {
       width: 100%;
-      padding: 12px;
+      padding: 12px 18px;
       border: 1px solid #e2e8f0;
-      border-radius: 20px;
+      border-radius: 28px;
       font-family: 'Cairo', sans-serif;
+      background: white;
     }
 
-    /* ========== التذييل ========== */
+    /* ========== FOOTER ========== */
     .footer {
-      background: #0a2540;
+      background: #0f172a;
       color: #cbd5e1;
       padding: 3rem 0 1rem;
     }
@@ -597,6 +704,17 @@
     .footer-col h4 {
       color: white;
       margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 0;
+      width: 40px;
+      height: 2px;
+      background: #f39c12;
     }
     .footer-col a {
       color: #cbd5e1;
@@ -606,32 +724,28 @@
       transition: 0.3s;
     }
     .footer-col a:hover {
-      color: #e67e22;
+      color: #f39c12;
+      transform: translateX(-5px);
     }
     .social-icons a {
       display: inline-block;
       margin-left: 1rem;
-      font-size: 1.4rem;
-      background: #1e3a5f;
-      width: 40px;
-      height: 40px;
+      font-size: 1.3rem;
+      background: #1e293b;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       text-align: center;
-      line-height: 40px;
+      line-height: 38px;
       transition: 0.3s;
     }
     .social-icons a:hover {
-      background: #e67e22;
-      color: #0a2540;
-    }
-    .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      margin-top: 2rem;
-      border-top: 1px solid #1e3a5f;
+      background: #f39c12;
+      color: #0f172a;
+      transform: translateY(-3px);
     }
 
-    /* ========== الأزرار العائمة ========== */
+    /* ========== FLOATING BUTTONS ========== */
     .floating-buttons {
       position: fixed;
       bottom: 25px;
@@ -651,39 +765,38 @@
       align-items: center;
       justify-content: center;
       font-size: 1.8rem;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: 0.3s;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      transition: all 0.3s;
       cursor: pointer;
       text-decoration: none;
     }
     .float-btn.call {
-      background: #e67e22;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
     }
     .float-btn.up {
-      background: #2c3e66;
+      background: #1e293b;
     }
     .float-btn:hover {
-      transform: scale(1.08);
+      transform: scale(1.1) rotate(5deg);
     }
 
-    /* ========== استجابة للشاشات الصغيرة ========== */
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 992px) {
       .hero .container {
         flex-direction: column;
         text-align: center;
       }
-      .hero-buttons {
-        justify-content: center;
-      }
       .nav-menu {
         display: none;
         flex-direction: column;
-        background: white;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(12px);
         position: absolute;
         top: 70px;
         left: 0;
         width: 100%;
         padding: 1.5rem;
+        gap: 1.2rem;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       }
       .nav-menu.active {
@@ -696,7 +809,7 @@
         display: none;
       }
       .step-item {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
       }
     }
     @media (max-width: 768px) {
@@ -707,15 +820,15 @@
         padding: 3rem 0;
       }
       .hero-content h1 {
-        font-size: 2.3rem;
+        font-size: 2.2rem;
       }
     }
 
     /* تأثير الظهور عند التمرير */
     .fade-up {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
+      transform: translateY(35px);
+      transition: all 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
     .fade-up.visible {
       opacity: 1;
@@ -725,271 +838,257 @@
 </head>
 <body>
 
-  <!-- شريط التنقل -->
-  <header>
-    <nav class="navbar" id="navbar">
-      <div class="nav-container">
-        <div class="logo"><a href="index.html">Elite<span>Drive</span></a></div>
-        <div class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></div>
-        <ul class="nav-menu" id="navMenu">
-          <li><a href="#home">الرئيسية</a></li>
-          <li><a href="#featured">السيارات</a></li>
-          <li><a href="#offers">العروض</a></li>
-          <li><a href="#contact">اتصل بنا</a></li>
-          <li><a href="booking.html" class="btn-book-nav">احجز الآن</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <!-- قسم الهيرو -->
-    <section class="hero" id="home">
-      <div class="container">
-        <div class="hero-content">
-          <h1>سيارات <span>فاخرة</span> بإيجار ذكي</h1>
-          <p>أفضل الأسعار بالدرهم المغربي، تأمين شامل، وأحدث الموديلات.</p>
-          <div class="hero-buttons">
-            <a href="#featured" class="btn-primary">استكشف السيارات</a>
-            <a href="booking.html" class="btn-outline">احجز الآن</a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=600&auto=format" alt="سيارة فاخرة">
-        </div>
-      </div>
-    </section>
-
-    <!-- قسم البحث -->
-    <section class="search-section">
-      <div class="container">
-        <div class="search-card">
-          <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-car"></i> ابحث عن سيارتك المثالية</h3>
-          <form class="search-form" id="searchForm">
-            <div class="input-group"><i class="fas fa-map-marker-alt"></i><label>المدينة</label><select><option>الدار البيضاء</option><option>مراكش</option><option>الرباط</option><option>طنجة</option></select></div>
-            <div class="input-group"><i class="fas fa-car-side"></i><label>نوع السيارة</label><select><option>جميع الأنواع</option><option>SUV</option><option>سيدان</option><option>فاخرة</option></select></div>
-            <div class="input-group"><i class="fas fa-calendar-day"></i><label>تاريخ البداية</label><input type="date" id="startDate"></div>
-            <div class="input-group"><i class="fas fa-calendar-week"></i><label>تاريخ النهاية</label><input type="date" id="endDate"></div>
-            <div class="input-group"><button type="submit" class="btn-search">بحث <i class="fas fa-arrow-left"></i></button></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- قسم العروض (أفقي) -->
-    <section class="offers-section" id="offers">
-      <div class="container">
-        <div class="section-header"><h2>عروض <span>خاصة</span></h2></div>
-        <div class="offers-slider">
-          <div class="offer-card"><div class="offer-icon"><i class="fas fa-tag"></i></div><h3>خصم 20%</h3><p>للحجوزات أطول من 7 أيام</p><a href="booking.html" class="btn-primary" style="padding: 6px 18px;">استفد</a></div>
-          <div class="offer-card"><div class="offer-icon"><i class="fas fa-gem"></i></div><h3>سيارات فاخرة</h3><p>مرسيدس، بي إم دبليو، أودي</p><a href="cars.html" class="btn-primary" style="padding: 6px 18px;">شاهد</a></div>
-          <div class="offer-card"><div class="offer-icon"><i class="fas fa-shield-alt"></i></div><h3>تأمين مجاني</h3><p>تأمين شامل بدون رسوم</p><a href="about.html" class="btn-primary" style="padding: 6px 18px;">تفاصيل</a></div>
-          <div class="offer-card"><div class="offer-icon"><i class="fas fa-gas-pump"></i></div><h3>وقود مجاني</h3><p>سيارة ممتلئة عند التسليم</p><a href="booking.html" class="btn-primary" style="padding: 6px 18px;">احجز</a></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- السيارات المميزة -->
-    <section class="featured-cars" id="featured">
-      <div class="container">
-        <div class="section-header"><h2>سيارات <span>مميزة</span></h2></div>
-        <div class="cars-grid" id="carsGrid"></div>
-      </div>
-    </section>
-
-    <!-- لماذا نحن (تمرير أفقي) -->
-    <section class="why-us">
-      <div class="container">
-        <div class="section-header"><h2>لماذا <span>نحن</span>؟</h2></div>
-        <div class="why-horizontal">
-          <div class="why-card-h"><i class="fas fa-headset"></i><h4>دعم 24/7</h4><p>فريق متخصص لمساعدتك في أي وقت.</p></div>
-          <div class="why-card-h"><i class="fas fa-gas-pump"></i><h4>وقود مجاني</h4><p>سيارة ممتلئة عند التسليم.</p></div>
-          <div class="why-card-h"><i class="fas fa-road"></i><h4>كيلومترات غير محدودة</h4><p>بدون قيود.</p></div>
-          <div class="why-card-h"><i class="fas fa-calendar-times"></i><h4>إلغاء مجاني</h4><p>قبل 24 ساعة من الاستلام.</p></div>
-          <div class="why-card-h"><i class="fas fa-shield-alt"></i><h4>تأمين شامل</h4><p>تغطية كاملة ضد الحوادث.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- خطوات الحجز بخط متصل -->
-    <section class="booking-steps">
-      <div class="container">
-        <div class="section-header"><h2>خطوات <span>الحجز</span></h2></div>
-        <div class="steps-container">
-          <div class="step-item"><div class="step-number">1</div><h4>اختر السيارة</h4><p>تصفح مجموعتنا الفاخرة واختر ما يناسبك.</p></div>
-          <div class="step-item"><div class="step-number">2</div><h4>حدد التواريخ</h4><p>اختر فترة الإيجار المناسبة لرحلتك.</p></div>
-          <div class="step-item"><div class="step-number">3</div><h4>أكمل البيانات</h4><p>أدخل معلوماتك بسهولة وأمان.</p></div>
-          <div class="step-item"><div class="step-number">4</div><h4>استلم سيارتك</h4><p>توصيل مجاني إلى موقعك المفضل.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- الأسئلة الشائعة (Accordion) -->
-    <section class="faq-section">
-      <div class="container">
-        <div class="section-header"><h2>الأسئلة <span>الشائعة</span></h2></div>
-        <div class="faq-grid">
-          <div class="faq-item"><div class="faq-question">ما هي متطلبات الحجز؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">تحتاج إلى رخصة سيارة سارية المفعول وبطاقة تعريف أو جواز سفر.</div></div>
-          <div class="faq-item"><div class="faq-question">هل يوجد تأمين شامل؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">نعم، جميع سياراتنا مؤمنة تأميناً شاملاً ضد الحوادث والسرقة.</div></div>
-          <div class="faq-item"><div class="faq-question">هل يمكنني إلغاء الحجز؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">نعم، الإلغاء مجاني قبل 24 ساعة من موعد الاستلام.</div></div>
-          <div class="faq-item"><div class="faq-question">ما هي طرق الدفع المتاحة؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">الدفع نقداً، بطاقة ائتمان، أو تحويل بنكي.</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- قسم التواصل -->
-    <section class="contact-section" id="contact">
-      <div class="container">
-        <div class="section-header"><h2>تواصل <span>معنا</span></h2></div>
-        <div class="contact-wrapper">
-          <div class="contact-info">
-            <div class="info-card"><i class="fas fa-phone-alt"></i><div><h4>الهاتف</h4><p>+212 5XX 123 456</p></div></div>
-            <div class="info-card"><i class="fas fa-envelope"></i><div><h4>البريد الإلكتروني</h4><p>contact@elitedrive.ma</p></div></div>
-            <div class="info-card"><i class="fas fa-map-marker-alt"></i><div><h4>المقر الرئيسي</h4><p>الدار البيضاء، شارع محمد الخامس</p></div></div>
-          </div>
-          <form class="contact-form" id="contactForm">
-            <div class="form-group"><input type="text" placeholder="الاسم الكامل" required></div>
-            <div class="form-group"><input type="email" placeholder="البريد الإلكتروني" required></div>
-            <div class="form-group"><textarea rows="4" placeholder="رسالتك..."></textarea></div>
-            <button type="submit" class="btn-primary">إرسال الرسالة <i class="fas fa-paper-plane"></i></button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- التذييل -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-col"><h4>EliteDrive</h4><p>كراء سيارات فاخرة منذ 2020. نضمن لكم أفضل تجربة قيادة بأحدث الموديلات.</p></div>
-      <div class="footer-col"><h4>روابط سريعة</h4><a href="#home">الرئيسية</a><a href="#featured">السيارات</a><a href="#offers">العروض</a><a href="about.html">من نحن</a><a href="booking.html">الحجز</a></div>
-      <div class="footer-col"><h4>الدعم</h4><a href="contact.html">اتصل بنا</a><a href="faq.html">الأسئلة الشائعة</a><a href="terms.html">الشروط والأحكام</a></div>
-      <div class="footer-col"><h4>ساعات العمل</h4><p>الإثنين - الجمعة: 08:00 - 22:00<br>السبت: 09:00 - 20:00</p></div>
-      <div class="footer-col"><h4>تابعنا</h4><div class="social-icons"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+<header>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo"><a href="index.html">Elite<span>Drive</span></a></div>
+      <div class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#featured">السيارات</a></li>
+        <li><a href="#offers">العروض</a></li>
+        <li><a href="#contact">اتصل بنا</a></li>
+        <li><a href="booking.html" class="btn-book-nav">احجز الآن</a></li>
+      </ul>
     </div>
-    <div class="footer-bottom"><p>© 2025 EliteDrive - جميع الحقوق محفوظة | كراء السيارات بالمغرب بالدرهم المغربي</p></div>
-  </footer>
+  </nav>
+</header>
 
-  <!-- الأزرار العائمة -->
-  <div class="floating-buttons">
-    <a href="https://wa.me/212612345678" class="float-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="tel:+212512345678" class="float-btn call"><i class="fas fa-phone-alt"></i></a>
-    <div class="float-btn up" id="goToTop"><i class="fas fa-arrow-up"></i></div>
+<main>
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1>قيادة <span>الأناقة</span> تبدأ من هنا</h1>
+        <p>أحدث السيارات الفاخرة بأفضل الأسعار بالدرهم المغربي. تأمين شامل، دعم 24/7، وتوصيل مجاني.</p>
+        <div class="hero-buttons">
+          <a href="#featured" class="btn-primary">استكشف السيارات</a>
+          <a href="booking.html" class="btn-outline">احجز الآن</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=600&auto=format" alt="سيارة فاخرة">
+      </div>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <div class="container">
+      <div class="search-card">
+        <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-car" style="color:#f39c12;"></i> ابحث عن سيارتك المثالية</h3>
+        <form class="search-form" id="searchForm">
+          <div class="input-group"><i class="fas fa-map-marker-alt"></i><label>المدينة</label><select><option>الدار البيضاء</option><option>مراكش</option><option>الرباط</option><option>طنجة</option></select></div>
+          <div class="input-group"><i class="fas fa-car-side"></i><label>نوع السيارة</label><select><option>جميع الأنواع</option><option>SUV</option><option>سيدان</option><option>فاخرة</option></select></div>
+          <div class="input-group"><i class="fas fa-calendar-day"></i><label>تاريخ البداية</label><input type="date" id="startDate"></div>
+          <div class="input-group"><i class="fas fa-calendar-week"></i><label>تاريخ النهاية</label><input type="date" id="endDate"></div>
+          <div class="input-group"><button type="submit" class="btn-search">بحث <i class="fas fa-arrow-left"></i></button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="offers-section" id="offers">
+    <div class="container">
+      <div class="section-header"><h2>عروض <span>خاصة</span></h2></div>
+      <div class="offers-slider">
+        <div class="offer-card"><div class="offer-icon"><i class="fas fa-tag"></i></div><h3>خصم 20%</h3><p>للحجوزات أطول من 7 أيام</p><a href="booking.html" class="btn-primary" style="padding: 6px 20px;">استفد</a></div>
+        <div class="offer-card"><div class="offer-icon"><i class="fas fa-gem"></i></div><h3>سيارات فاخرة</h3><p>مرسيدس، بي إم دبليو، أودي</p><a href="cars.html" class="btn-primary" style="padding: 6px 20px;">شاهد</a></div>
+        <div class="offer-card"><div class="offer-icon"><i class="fas fa-shield-alt"></i></div><h3>تأمين مجاني</h3><p>تأمين شامل بدون رسوم</p><a href="about.html" class="btn-primary" style="padding: 6px 20px;">تفاصيل</a></div>
+        <div class="offer-card"><div class="offer-icon"><i class="fas fa-gas-pump"></i></div><h3>وقود مجاني</h3><p>سيارة ممتلئة عند التسليم</p><a href="booking.html" class="btn-primary" style="padding: 6px 20px;">احجز</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-cars" id="featured">
+    <div class="container">
+      <div class="section-header"><h2>سيارات <span>مميزة</span></h2></div>
+      <div class="cars-grid" id="carsGrid"></div>
+    </div>
+  </section>
+
+  <section class="why-us">
+    <div class="container">
+      <div class="section-header"><h2>لماذا <span>نحن</span>؟</h2></div>
+      <div class="why-horizontal">
+        <div class="why-card-h"><i class="fas fa-headset"></i><h4>دعم 24/7</h4><p>فريق متخصص لمساعدتك في أي وقت.</p></div>
+        <div class="why-card-h"><i class="fas fa-gas-pump"></i><h4>وقود مجاني</h4><p>سيارة ممتلئة عند التسليم.</p></div>
+        <div class="why-card-h"><i class="fas fa-road"></i><h4>كيلومترات غير محدودة</h4><p>بدون قيود.</p></div>
+        <div class="why-card-h"><i class="fas fa-calendar-times"></i><h4>إلغاء مجاني</h4><p>قبل 24 ساعة من الاستلام.</p></div>
+        <div class="why-card-h"><i class="fas fa-shield-alt"></i><h4>تأمين شامل</h4><p>تغطية كاملة ضد الحوادث.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-steps">
+    <div class="container">
+      <div class="section-header"><h2>خطوات <span>الحجز</span></h2></div>
+      <div class="steps-container">
+        <div class="step-item"><div class="step-number">1</div><h4>اختر السيارة</h4><p>تصفح مجموعتنا الفاخرة واختر ما يناسبك.</p></div>
+        <div class="step-item"><div class="step-number">2</div><h4>حدد التواريخ</h4><p>اختر فترة الإيجار المناسبة لرحلتك.</p></div>
+        <div class="step-item"><div class="step-number">3</div><h4>أكمل البيانات</h4><p>أدخل معلوماتك بسهولة وأمان.</p></div>
+        <div class="step-item"><div class="step-number">4</div><h4>استلم سيارتك</h4><p>توصيل مجاني إلى موقعك المفضل.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header"><h2>الأسئلة <span>الشائعة</span></h2></div>
+      <div class="faq-grid">
+        <div class="faq-item"><div class="faq-question">ما هي متطلبات الحجز؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">تحتاج إلى رخصة سيارة سارية المفعول وبطاقة تعريف أو جواز سفر.</div></div>
+        <div class="faq-item"><div class="faq-question">هل يوجد تأمين شامل؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">نعم، جميع سياراتنا مؤمنة تأميناً شاملاً ضد الحوادث والسرقة.</div></div>
+        <div class="faq-item"><div class="faq-question">هل يمكنني إلغاء الحجز؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">نعم، الإلغاء مجاني قبل 24 ساعة من موعد الاستلام.</div></div>
+        <div class="faq-item"><div class="faq-question">ما هي طرق الدفع المتاحة؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">الدفع نقداً، بطاقة ائتمان، أو تحويل بنكي.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header"><h2>تواصل <span>معنا</span></h2></div>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <div class="info-card"><i class="fas fa-phone-alt"></i><div><h4>الهاتف</h4><p>+212 5XX 123 456</p></div></div>
+          <div class="info-card"><i class="fas fa-envelope"></i><div><h4>البريد الإلكتروني</h4><p>contact@elitedrive.ma</p></div></div>
+          <div class="info-card"><i class="fas fa-map-marker-alt"></i><div><h4>المقر الرئيسي</h4><p>الدار البيضاء، شارع محمد الخامس</p></div></div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group"><input type="text" placeholder="الاسم الكامل" required></div>
+          <div class="form-group"><input type="email" placeholder="البريد الإلكتروني" required></div>
+          <div class="form-group"><textarea rows="4" placeholder="رسالتك..."></textarea></div>
+          <button type="submit" class="btn-primary">إرسال الرسالة <i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col"><h4>EliteDrive</h4><p>كراء سيارات فاخرة منذ 2020. نضمن لكم أفضل تجربة قيادة بأحدث الموديلات.</p></div>
+    <div class="footer-col"><h4>روابط سريعة</h4><a href="#home">الرئيسية</a><a href="#featured">السيارات</a><a href="#offers">العروض</a><a href="about.html">من نحن</a><a href="booking.html">الحجز</a></div>
+    <div class="footer-col"><h4>الدعم</h4><a href="contact.html">اتصل بنا</a><a href="faq.html">الأسئلة الشائعة</a><a href="terms.html">الشروط والأحكام</a></div>
+    <div class="footer-col"><h4>ساعات العمل</h4><p>الإثنين - الجمعة: 08:00 - 22:00<br>السبت: 09:00 - 20:00</p></div>
+    <div class="footer-col"><h4>تابعنا</h4><div class="social-icons"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
   </div>
+  <div class="footer-bottom" style="text-align:center; padding-top:2rem; border-top:1px solid #1e293b;"><p>© 2025 EliteDrive - جميع الحقوق محفوظة | كراء السيارات بالمغرب بالدرهم المغربي</p></div>
+</footer>
 
-  <script>
-    // بيانات السيارات (بالدرهم المغربي)
-    const carsData = [
-      { id:1, name:"Mercedes S-Class", price:1200, rating:4.8, image:"https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=600", badge:"الأكثر طلباً", transmission:"أوتوماتيك", fuel:"بنزين", seats:5 },
-      { id:2, name:"BMW X5", price:850, rating:4.7, image:"https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600", badge:"جديد", transmission:"أوتوماتيك", fuel:"ديزل", seats:5 },
-      { id:3, name:"Range Rover Velar", price:1500, rating:4.9, image:"https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=600", badge:"فاخرة", transmission:"أوتوماتيك", fuel:"بنزين", seats:5 },
-      { id:4, name:"Audi A6", price:700, rating:4.6, image:"https://images.unsplash.com/photo-1606664515524-8b6b4b2e1b5b?w=600", badge:"", transmission:"أوتوماتيك", fuel:"بنزين", seats:5 }
-    ];
+<div class="floating-buttons">
+  <a href="https://wa.me/212612345678" class="float-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="tel:+212512345678" class="float-btn call"><i class="fas fa-phone-alt"></i></a>
+  <div class="float-btn up" id="goToTop"><i class="fas fa-arrow-up"></i></div>
+</div>
 
-    function renderCars() {
-      const grid = document.getElementById("carsGrid");
-      if(!grid) return;
-      grid.innerHTML = "";
-      carsData.forEach(car => {
-        const card = document.createElement("div");
-        card.className = "car-card fade-up";
-        card.innerHTML = `
-          <img src="${car.image}" alt="${car.name}">
-          <div class="car-info">
-            <div class="car-title"><h3>${car.name}</h3>${car.badge ? `<span class="badge">${car.badge}</span>` : ''}</div>
-            <div class="rating">★★★★★ <span>(${car.rating})</span></div>
-            <div class="price">${car.price} درهم <small>/ اليوم</small></div>
-            <div class="car-specs"><i class="fas fa-cogs"></i> ${car.transmission} &nbsp;|&nbsp; <i class="fas fa-gas-pump"></i> ${car.fuel} &nbsp;|&nbsp; <i class="fas fa-users"></i> ${car.seats} مقاعد</div>
-            <div class="free-cancel"><i class="fas fa-check-circle"></i> إلغاء مجاني خلال 24 ساعة</div>
-            <div class="car-actions">
-              <a href="car-details.html?id=${car.id}" class="btn-details">تفاصيل</a>
-              <a href="booking.html?car=${car.id}" class="btn-book-card">احجز الآن</a>
-            </div>
+<script>
+  const carsData = [
+    { id:1, name:"Mercedes S-Class", price:1200, rating:4.8, image:"https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=600", badge:"الأكثر طلباً", transmission:"أوتوماتيك", fuel:"بنزين", seats:5 },
+    { id:2, name:"BMW X5", price:850, rating:4.7, image:"https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600", badge:"جديد", transmission:"أوتوماتيك", fuel:"ديزل", seats:5 },
+    { id:3, name:"Range Rover Velar", price:1500, rating:4.9, image:"https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=600", badge:"فاخرة", transmission:"أوتوماتيك", fuel:"بنزين", seats:5 },
+    { id:4, name:"Audi A6", price:700, rating:4.6, image:"https://images.unsplash.com/photo-1606664515524-8b6b4b2e1b5b?w=600", badge:"", transmission:"أوتوماتيك", fuel:"بنزين", seats:5 }
+  ];
+
+  function renderCars() {
+    const grid = document.getElementById("carsGrid");
+    if(!grid) return;
+    grid.innerHTML = "";
+    carsData.forEach(car => {
+      const card = document.createElement("div");
+      card.className = "car-card fade-up";
+      card.innerHTML = `
+        <img src="${car.image}" alt="${car.name}">
+        <div class="car-info">
+          <div class="car-title"><h3>${car.name}</h3>${car.badge ? `<span class="badge">${car.badge}</span>` : ''}</div>
+          <div class="rating">★★★★★ <span>(${car.rating})</span></div>
+          <div class="price">${car.price} درهم <small>/ اليوم</small></div>
+          <div class="car-specs"><i class="fas fa-cogs"></i> ${car.transmission} &nbsp;|&nbsp; <i class="fas fa-gas-pump"></i> ${car.fuel} &nbsp;|&nbsp; <i class="fas fa-users"></i> ${car.seats} مقاعد</div>
+          <div class="free-cancel"><i class="fas fa-check-circle"></i> إلغاء مجاني خلال 24 ساعة</div>
+          <div class="car-actions">
+            <a href="car-details.html?id=${car.id}" class="btn-details">تفاصيل</a>
+            <a href="booking.html?car=${car.id}" class="btn-book-card">احجز الآن</a>
           </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    // الأسئلة الشائعة (accordion)
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        const parent = q.parentElement;
-        parent.classList.toggle('active');
-      });
+        </div>
+      `;
+      grid.appendChild(card);
     });
+  }
 
-    // تأثير الظل على الهيدر عند التمرير
-    window.addEventListener('scroll', () => {
-      const navbar = document.getElementById('navbar');
-      if(window.scrollY > 50) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-      const topBtn = document.getElementById('goToTop');
-      if(window.scrollY > 300) topBtn.style.display = 'flex';
-      else topBtn.style.display = 'none';
+  // Accordion FAQ
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const parent = q.parentElement;
+      parent.classList.toggle('active');
     });
+  });
 
-    // زر العودة للأعلى
-    document.getElementById('goToTop').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  // Navbar shadow + go to top visibility
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if(window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+    const topBtn = document.getElementById('goToTop');
+    if(window.scrollY > 300) topBtn.style.display = 'flex';
+    else topBtn.style.display = 'none';
+  });
+  document.getElementById('goToTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
-    // قائمة الجوال مع أنيميشن
-    const toggleBtn = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    if(toggleBtn && navMenu) {
-      toggleBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        toggleBtn.classList.toggle('active');
-        const icon = toggleBtn.querySelector('i');
-        if(navMenu.classList.contains('active')) {
-          icon.classList.remove('fa-bars');
-          icon.classList.add('fa-times');
-        } else {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
-      });
-    }
-
-    // تمرير سلس للروابط الداخلية
-    document.querySelectorAll('.nav-menu a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target) target.scrollIntoView({ behavior: 'smooth' });
-        navMenu.classList.remove('active');
-        toggleBtn.classList.remove('active');
-        const icon = toggleBtn.querySelector('i');
+  // Mobile nav animation
+  const toggleBtn = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  if(toggleBtn && navMenu) {
+    toggleBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      toggleBtn.classList.toggle('active');
+      const icon = toggleBtn.querySelector('i');
+      if(navMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
         icon.classList.remove('fa-times');
         icon.classList.add('fa-bars');
-      });
+      }
     });
+  }
 
-    // تأثير الظهور عند التمرير
-    const faders = document.querySelectorAll('.fade-up');
-    const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-    const appearOnScroll = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, appearOptions);
-    faders.forEach(f => appearOnScroll.observe(f));
-
-    // إرسال نموذج الاتصال
-    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+  // Smooth scroll
+  document.querySelectorAll('.nav-menu a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
       e.preventDefault();
-      alert('تم إرسال رسالتك بنجاح. سيتواصل معك فريق الدعم قريباً.');
-      e.target.reset();
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target) target.scrollIntoView({ behavior: 'smooth' });
+      navMenu.classList.remove('active');
+      toggleBtn.classList.remove('active');
+      const icon = toggleBtn.querySelector('i');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
     });
+  });
 
-    renderCars();
-    setTimeout(() => {
-      document.querySelectorAll('.car-card').forEach(c => appearOnScroll.observe(c));
-    }, 100);
-  </script>
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('.fade-up');
+  const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+  faders.forEach(f => appearOnScroll.observe(f));
+
+  // Contact form
+  document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('تم إرسال رسالتك بنجاح. سيتواصل معك فريق الدعم قريباً.');
+    e.target.reset();
+  });
+
+  renderCars();
+  setTimeout(() => {
+    document.querySelectorAll('.car-card').forEach(c => appearOnScroll.observe(c));
+  }, 100);
+</script>
 </body>
 </html>
