@@ -91,10 +91,10 @@
       color: white;
       transform: translateY(-2px);
     }
-    /* Top bar */
+    /* Top bar - جديد */
     .top-bar {
       background: #0f172a;
-      color: #cbd5e1;
+      color: #f39c12;
       padding: 0.6rem 2rem;
       font-size: 0.85rem;
       display: flex;
@@ -102,10 +102,14 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
+      border-bottom: 1px solid #f39c12;
     }
     .top-bar .contact-info i {
       margin-left: 8px;
       color: #f39c12;
+    }
+    .top-bar .contact-info span {
+      color: #cbd5e1;
     }
     /* Navbar */
     .navbar {
@@ -151,11 +155,16 @@
       padding: 0.5rem 1.4rem;
       border-radius: 40px;
     }
+    /* زر الهامبرغر مع أنيميشن */
     .nav-toggle {
       display: none;
       font-size: 1.6rem;
       cursor: pointer;
       color: #0f172a;
+      transition: transform 0.3s ease;
+    }
+    .nav-toggle.active {
+      transform: rotate(90deg);
     }
     /* Hero Section */
     .hero {
@@ -198,7 +207,7 @@
       border-radius: 32px;
       box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
     }
-    /* Search Section - wide card */
+    /* Search Section */
     .search-section {
       background: #f4f7fc;
       padding-top: 0;
@@ -352,21 +361,52 @@
     .btn-details:hover { background: #fef3e2; }
     .btn-book-card { background: #f39c12; color: white; }
     .btn-book-card:hover { background: #e67e22; }
-    /* Why Us (4 cards) */
-    .why-us { background: white; }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
+    /* Why Us - Horizontal Scroll (معدل بالكامل) */
+    .why-us {
+      background: #fef9e8; /* خلفية ذهبية فاتحة */
+      padding: 3rem 0;
     }
-    .why-card {
-      text-align: center;
-      padding: 1.8rem;
+    .why-horizontal {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 1rem 0.5rem;
+      scrollbar-width: thin;
+    }
+    .why-horizontal::-webkit-scrollbar {
+      height: 6px;
+    }
+    .why-card-h {
+      min-width: 280px;
+      flex: 0 0 auto;
+      scroll-snap-align: start;
       background: white;
       border-radius: 28px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+      border: 1px solid #f39c12;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
-    .why-card i { font-size: 2.8rem; color: #f39c12; margin-bottom: 1rem; }
+    .why-card-h:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 25px rgba(243, 156, 18, 0.2);
+      border-color: #e67e22;
+    }
+    .why-card-h i {
+      font-size: 2.8rem;
+      color: #f39c12;
+      margin-bottom: 1rem;
+    }
+    .why-card-h h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #0f172a;
+    }
+    .why-card-h p {
+      color: #5a6874;
+    }
     /* Booking Steps with connecting line */
     .booking-steps { background: #f4f7fc; position: relative; }
     .steps-container {
@@ -574,13 +614,13 @@
   </style>
 </head>
 <body>
-  <!-- Top bar -->
+  <!-- Top bar - معدل -->
   <div class="top-bar">
     <div class="contact-info">
-      <i class="fas fa-phone-alt"></i> +212 5XX 123 456 &nbsp;|&nbsp;
-      <i class="fas fa-envelope"></i> contact@elitedrive.ma
+      <i class="fas fa-phone-alt"></i> <span>+212 5XX 123 456</span> &nbsp;|&nbsp;
+      <i class="fas fa-envelope"></i> <span>contact@elitedrive.ma</span>
     </div>
-    <div><i class="fas fa-map-marker-alt"></i> الدار البيضاء، المغرب</div>
+    <div><i class="fas fa-map-marker-alt"></i> <span>الدار البيضاء، المغرب</span></div>
   </div>
 
   <header>
@@ -654,15 +694,16 @@
       </div>
     </section>
 
-    <!-- Why Us (4 cards) -->
+    <!-- Why Us - Horizontal Scroll (معدل) -->
     <section class="why-us">
       <div class="container">
         <div class="section-header"><h2>لماذا <span>نحن</span>؟</h2></div>
-        <div class="why-grid">
-          <div class="why-card fade-up"><i class="fas fa-headset"></i><h4>دعم 24/7</h4><p>فريق متخصص لمساعدتك في أي وقت.</p></div>
-          <div class="why-card fade-up"><i class="fas fa-gas-pump"></i><h4>وقود مجاني</h4><p>سيارة ممتلئة عند التسليم.</p></div>
-          <div class="why-card fade-up"><i class="fas fa-road"></i><h4>كيلومترات غير محدودة</h4><p>بدون قيود.</p></div>
-          <div class="why-card fade-up"><i class="fas fa-calendar-times"></i><h4>إلغاء مجاني</h4><p>قبل 24 ساعة من الاستلام.</p></div>
+        <div class="why-horizontal">
+          <div class="why-card-h"><i class="fas fa-headset"></i><h4>دعم 24/7</h4><p>فريق متخصص لمساعدتك في أي وقت.</p></div>
+          <div class="why-card-h"><i class="fas fa-gas-pump"></i><h4>وقود مجاني</h4><p>سيارة ممتلئة عند التسليم.</p></div>
+          <div class="why-card-h"><i class="fas fa-road"></i><h4>كيلومترات غير محدودة</h4><p>بدون قيود.</p></div>
+          <div class="why-card-h"><i class="fas fa-calendar-times"></i><h4>إلغاء مجاني</h4><p>قبل 24 ساعة من الاستلام.</p></div>
+          <div class="why-card-h"><i class="fas fa-shield-alt"></i><h4>تأمين شامل</h4><p>تغطية كاملة ضد الحوادث.</p></div>
         </div>
       </div>
     </section>
@@ -734,7 +775,7 @@
   </div>
 
   <script>
-    // Car data (with specs, badges, ratings)
+    // Car data
     const carsData = [
       { id:1, name:"Mercedes S-Class", price:1200, rating:4.8, image:"https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=600", badge:"الأكثر طلباً", transmission:"أوتوماتيك", fuel:"بنزين", seats:5 },
       { id:2, name:"BMW X5", price:850, rating:4.7, image:"https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600", badge:"جديد", transmission:"أوتوماتيك", fuel:"ديزل", seats:5 },
@@ -775,7 +816,7 @@
       });
     });
 
-    // Navbar shadow
+    // Navbar shadow and go to top
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
       if(window.scrollY > 50) navbar.classList.add('scrolled');
@@ -788,12 +829,24 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Mobile nav
+    // Mobile nav with animation on toggle button
     const toggleBtn = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
-    toggleBtn?.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
+    if(toggleBtn && navMenu) {
+      toggleBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        toggleBtn.classList.toggle('active');
+        // تغيير الأيقونة مع أنيميشن
+        const icon = toggleBtn.querySelector('i');
+        if(navMenu.classList.contains('active')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+    }
 
     // Smooth scroll for anchor links
     document.querySelectorAll('.nav-menu a[href^="#"]').forEach(anchor => {
@@ -802,6 +855,10 @@
         const target = document.querySelector(this.getAttribute('href'));
         if(target) target.scrollIntoView({ behavior: 'smooth' });
         navMenu.classList.remove('active');
+        toggleBtn.classList.remove('active');
+        const icon = toggleBtn.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
       });
     });
 
