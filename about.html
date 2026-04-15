@@ -1,5 +1,368 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>من نحن | EliteDrive</title><link rel="stylesheet" href="css/common.css"><link rel="stylesheet" href="css/about.css"></head>
-<body><nav>...</nav><div class="container about-hero"><h2>من نحن <span>EliteDrive</span></h2><p>تأسست شركة EliteDrive لتقديم تجربة كراء سيارات لا مثيل لها، حيث نقدم أسطولاً حديثاً من السيارات الفاخرة والرياضية بأعلى معايير الجودة والسلامة.</p><div class="vision"><h3>رؤيتنا</h3><p>أن نكون الوجهة الأولى لكراء السيارات الفاخرة في المنطقة، من خلال التميز والثقة والابتكار.</p></div></div><footer>...</footer><script src="js/global.js"></script><script src="js/about.js"></script></body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="EliteDrive - من نحن. تعرف على قصتنا ورؤيتنا وخدماتنا في مجال كراء السيارات الفاخرة بالمغرب.">
+  <title>EliteDrive | من نحن</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2c7da0;
+      --primary-light: #489fb5;
+      --primary-dark: #1f5e7a;
+      --secondary: #d4a373;
+      --secondary-light: #e0b98c;
+      --secondary-dark: #b8824f;
+      --light-bg: #fefcf5;
+      --light-bg-alt: #f4f2eb;
+      --card-bg: #ffffff;
+      --text-dark: #1e2a3a;
+      --text-muted: #5a6e7c;
+      --text-dim: #8a9aa8;
+      --border-light: #e2e0d8;
+      --border-hover: #d4a373;
+      --radius: 4px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.05);
+      --shadow-md: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--border-light); }
+    ::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 10px; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px;
+      border-radius: 2px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+      text-decoration: none; transition: all 0.3s; border: none;
+    }
+    .btn-gold {
+      background: var(--secondary); color: var(--text-dark);
+    }
+    .btn-gold:hover { background: var(--secondary-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,163,115,0.25); }
+    /* Navbar */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(254,252,245,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light); transition: all 0.3s;
+    }
+    .navbar.scrolled { background: rgba(254,252,245,0.98); box-shadow: var(--shadow-sm); }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo a {
+      font-size: 1.7rem; font-weight: 900; color: var(--text-dark); text-decoration: none;
+    }
+    .logo span { color: var(--secondary); }
+    .nav-menu {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-menu a {
+      text-decoration: none; color: var(--text-muted); font-weight: 600;
+      transition: 0.3s; position: relative;
+    }
+    .nav-menu a::after {
+      content: ''; position: absolute; bottom: -4px; right: 0;
+      width: 0; height: 1px; background: var(--secondary); transition: width 0.3s;
+    }
+    .nav-menu a:hover, .nav-menu a.active { color: var(--text-dark); }
+    .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
+    .btn-book-nav {
+      background: var(--secondary); color: var(--text-dark) !important;
+      padding: 0.5rem 1.4rem; border-radius: 2px;
+    }
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--border-light);
+      width: 42px; height: 42px; border-radius: var(--radius);
+      font-size: 1.1rem; cursor: pointer; color: var(--text-dark);
+    }
+    .nav-toggle:hover { border-color: var(--secondary); color: var(--secondary); }
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--light-bg-alt), var(--light-bg));
+      padding: 3rem 0 2rem; text-align: center;
+    }
+    .page-header h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); }
+    .page-header h1 span { color: var(--secondary); }
+    .page-header p { color: var(--text-muted); margin-top: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    /* About Content */
+    .about-section { padding: 3rem 0; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: center; margin-bottom: 3rem;
+    }
+    .about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
+    .about-text h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-dark); }
+    .about-image img {
+      width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+      background: var(--card-bg); padding: 2rem; border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light); margin: 2rem 0;
+    }
+    .stat-item { text-align: center; }
+    .stat-number { font-size: 2.2rem; font-weight: 800; color: var(--secondary); }
+    .stat-label { font-size: 0.85rem; color: var(--text-muted); }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem; margin: 2rem 0;
+    }
+    .value-card {
+      background: var(--card-bg); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 1.8rem; text-align: center;
+      transition: 0.3s;
+    }
+    .value-card:hover { transform: translateY(-5px); border-color: var(--border-hover); }
+    .value-icon {
+      width: 60px; height: 60px; background: rgba(212,163,115,0.12);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; color: var(--secondary); font-size: 1.6rem;
+    }
+    .value-card h4 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .value-card p { font-size: 0.85rem; color: var(--text-muted); }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem; margin: 2rem 0;
+    }
+    .team-card {
+      background: var(--card-bg); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 1.5rem; text-align: center;
+    }
+    .team-card img {
+      width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+      margin-bottom: 1rem; border: 3px solid var(--secondary);
+    }
+    .team-card h4 { font-size: 1.1rem; font-weight: 800; }
+    .team-card p { font-size: 0.8rem; color: var(--text-muted); }
+    /* Footer */
+    .footer {
+      background: var(--light-bg-alt); border-top: 1px solid var(--border-light);
+      padding: 3rem 0 1.5rem; margin-top: 3rem;
+    }
+    .footer-container {
+      max-width: 1280px; margin: auto; display: flex; flex-wrap: wrap;
+      gap: 2rem; padding: 0 2rem;
+    }
+    .footer-col { flex: 1; min-width: 180px; }
+    .footer-col h3, .footer-col h4 { color: var(--text-dark); margin-bottom: 1rem; }
+    .footer-col a { color: var(--text-dim); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: 0.2s; }
+    .footer-col a:hover { color: var(--secondary); }
+    .social-links { display: flex; gap: 0.8rem; margin-top: 1rem; }
+    .social-links a {
+      width: 36px; height: 36px; background: var(--card-bg);
+      border: 1px solid var(--border-light); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); transition: 0.2s;
+    }
+    .social-links a:hover { background: var(--secondary); color: var(--text-dark); border-color: var(--secondary); }
+    .footer-bottom { text-align: center; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: var(--text-dim); }
+    /* Floating Buttons */
+    .floaters {
+      position: fixed; bottom: 25px; left: 25px;
+      display: flex; flex-direction: column; gap: 10px; z-index: 999;
+    }
+    .floater {
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; text-decoration: none; transition: 0.3s;
+      box-shadow: var(--shadow-sm); cursor: pointer; border: none;
+    }
+    .floater-wa { background: #25d366; color: #fff; }
+    .floater-call { background: var(--secondary); color: var(--text-dark); }
+    .floater-top { background: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-light); display: none; }
+    .floater:hover { transform: scale(1.08); }
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(25px); transition: all 0.6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    /* Responsive */
+    @media (max-width: 992px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-menu { display: none; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0;
+        background: var(--card-bg); padding: 1.5rem; gap: 1.2rem; border-bottom: 1px solid var(--border-light); }
+      .nav-menu.open { display: flex; }
+      .nav-toggle { display: flex; align-items: center; justify-content: center; }
+      .container { padding: 0 1.2rem; }
+      .page-header h1 { font-size: 2rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .team-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">Elite<span>Drive</span></a></div>
+    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="cars.html">السيارات</a></li>
+      <li><a href="about.html" class="active">من نحن</a></li>
+      <li><a href="contact.html">اتصل بنا</a></li>
+      <li><a href="booking.html" class="btn-book-nav">احجز الآن</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <h1>من نحن <span>EliteDrive</span></h1>
+    <p>قصتنا، رؤيتنا، وقيمنا التي نؤمن بها</p>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="container">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <h3>قصتنا</h3>
+        <p>تأسست EliteDrive عام 2020 بهدف تغيير مفهوم كراء السيارات الفاخرة في المغرب. بدأنا بأسطول صغير من السيارات الراقية، وسرعان ما أصبحنا الوجهة الأولى لعشاق الفخامة والأداء العالي.</p>
+        <p>نؤمن بأن تجربة القيادة يجب أن تكون استثنائية مثل الوجهات التي تصل إليها. لذلك نحرص على تقديم أحدث الموديلات، وأعلى معايير النظافة والصيانة، وفريق دعم متخصص على مدار الساعة.</p>
+        <p>اليوم، نفخر بخدمة آلاف العملاء الراضين، ونسعى باستمرار لتوسيع أسطولنا وخدماتنا لتشمل جميع أنحاء المملكة.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&auto=format" alt="فريق EliteDrive">
+      </div>
+    </div>
+
+    <div class="stats-grid reveal">
+      <div class="stat-item"><div class="stat-number">+200</div><div class="stat-label">سيارة فاخرة</div></div>
+      <div class="stat-item"><div class="stat-number">+5K</div><div class="stat-label">عميل راضٍ</div></div>
+      <div class="stat-item"><div class="stat-number">4.9★</div><div class="stat-label">تقييم العملاء</div></div>
+      <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">دعم متواصل</div></div>
+    </div>
+
+    <div class="about-grid reveal" style="direction: rtl;">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&auto=format" alt="رؤيتنا">
+      </div>
+      <div class="about-text">
+        <h3>رؤيتنا ورسالتنا</h3>
+        <p><strong>رؤيتنا:</strong> أن نكون الوجهة الأولى لكراء السيارات الفاخرة في المنطقة، من خلال التميز والثقة والابتكار.</p>
+        <p><strong>رسالتنا:</strong> تقديم تجربة كراء سيارات لا تُنسى تجمع بين الفخامة، الأمان، والخدمة الاستثنائية، مع الحفاظ على الشفافية وأفضل الأسعار.</p>
+        <p>نطمح إلى التوسع إقليمياً ودولياً، مع الحفاظ على جودة الخدمة التي بنينا عليها سمعتنا.</p>
+      </div>
+    </div>
+
+    <div class="section-header reveal" style="text-align: center; margin: 3rem 0 1.5rem;">
+      <h2 style="font-size: 1.8rem;">قيمنا <span>الجوهرية</span></h2>
+      <div style="width: 50px; height: 2px; background: var(--secondary); margin: 0.5rem auto;"></div>
+    </div>
+    <div class="values-grid reveal">
+      <div class="value-card"><div class="value-icon"><i class="fas fa-gem"></i></div><h4>الفخامة</h4><p>نقدم فقط أفضل الموديلات الفاخرة بأعلى معايير الجودة.</p></div>
+      <div class="value-card"><div class="value-icon"><i class="fas fa-shield-alt"></i></div><h4>الثقة</h4><p>نضمن الشفافية في العقود والأسعار، ونحترم وعودنا.</p></div>
+      <div class="value-card"><div class="value-icon"><i class="fas fa-headset"></i></div><h4>الخدمة</h4><p>فريق دعم متخصص متاح 24/7 لحل أي استفسار أو مشكلة.</p></div>
+      <div class="value-card"><div class="value-icon"><i class="fas fa-leaf"></i></div><h4>الاستدامة</h4><p>نعمل على إدخال سيارات كهربائية وصديقة للبيئة في أسطولنا.</p></div>
+    </div>
+
+    <div class="section-header reveal" style="text-align: center; margin: 3rem 0 1.5rem;">
+      <h2 style="font-size: 1.8rem;">فريق <span>القيادة</span></h2>
+      <div style="width: 50px; height: 2px; background: var(--secondary); margin: 0.5rem auto;"></div>
+    </div>
+    <div class="team-grid reveal">
+      <div class="team-card"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="مدير"><h4>أحمد المنصوري</h4><p>المدير العام</p></div>
+      <div class="team-card"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="مديرة"><h4>سارة الحسيني</h4><p>مديرة العمليات</p></div>
+      <div class="team-card"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt="مدير"><h4>يوسف فتحي</h4><p>مدير الأسطول</p></div>
+      <div class="team-card"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt="مديرة"><h4>نادية الشرقاوي</h4><p>مديرة خدمة العملاء</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>EliteDrive</h3>
+      <p>كراء سيارات فاخرة منذ 2020. نقدم أفضل تجربة قيادة بأحدث الموديلات وأفضل الأسعار بالدرهم المغربي.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <a href="index.html">الرئيسية</a>
+      <a href="cars.html">السيارات</a>
+      <a href="about.html">من نحن</a>
+      <a href="booking.html">الحجز</a>
+    </div>
+    <div class="footer-col">
+      <h4>الدعم</h4>
+      <a href="contact.html">اتصل بنا</a>
+      <a href="#">الأسئلة الشائعة</a>
+      <a href="#">الشروط والأحكام</a>
+    </div>
+    <div class="footer-col">
+      <h4>ساعات العمل</h4>
+      <p>الإثنين – الجمعة: 08:00 – 22:00<br>السبت: 09:00 – 20:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 EliteDrive — جميع الحقوق محفوظة | كراء السيارات الفاخرة بالمغرب · الدرهم المغربي</p>
+  </div>
+</footer>
+
+<div class="floaters">
+  <a href="https://wa.me/212612345678" class="floater floater-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="tel:+212512345678" class="floater floater-call"><i class="fas fa-phone-alt"></i></a>
+  <button class="floater floater-top" id="goTop"><i class="fas fa-arrow-up"></i></button>
+</div>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("navbar");
+    if (window.scrollY > 40) navbar.classList.add("scrolled");
+    else navbar.classList.remove("scrolled");
+    const goTop = document.getElementById("goTop");
+    goTop.style.display = window.scrollY > 300 ? "flex" : "none";
+  });
+  document.getElementById("goTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+  if (navToggle) {
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+      const icon = navToggle.querySelector("i");
+      icon.className = navMenu.classList.contains("open") ? "fas fa-times" : "fas fa-bars";
+    });
+  }
+
+  // Close menu on anchor click
+  document.querySelectorAll(".nav-menu a").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      if (navToggle) navToggle.querySelector("i").className = "fas fa-bars";
+    });
+  });
+
+  // Reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
