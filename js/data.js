@@ -1,0 +1,8 @@
+const carData = [
+  { id: 1, name: "Mercedes-Benz S-Class", type: "Luxury", pricePerDay: 120, image: "https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=600", images: ["https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=800","https://images.unsplash.com/photo-1606664515524-8b6b4b2e1b5b?w=800"], seats: 5, transmission: "أوتوماتيك", fuel: "بنزين", description: "فخامة لا مثيل لها وأداء استثنائي." },
+  { id: 2, name: "BMW X5", type: "SUV", pricePerDay: 85, image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600", images: ["https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=800"], seats: 5, transmission: "أوتوماتيك", fuel: "ديزل", description: "سيارة رياضية متعددة الاستخدامات." },
+  { id: 3, name: "Audi A6", type: "Sedan", pricePerDay: 70, image: "https://images.unsplash.com/photo-1606664515524-8b6b4b2e1b5b?w=600", images: [], seats: 5, transmission: "أوتوماتيك", fuel: "بنزين", description: "أناقة وراحة للسفر الطويل." },
+  { id: 4, name: "Range Rover Velar", type: "SUV", pricePerDay: 150, image: "https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=600", seats: 5, transmission: "أوتوماتيك", fuel: "بنزين", description: "فاخرة وقوية لكل التضاريس." },
+  { id: 5, name: "Porsche 911", type: "Luxury", pricePerDay: 250, image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600", seats: 4, transmission: "أوتوماتيك", fuel: "بنزين", description: "رياضية خارقة." },
+  { id: 6, name: "Tesla Model 3", type: "Sedan", pricePerDay: 95, image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600", seats: 5, transmission: "كهربائي", fuel: "كهرباء", description: "صديقة للبيئة وتقنية متطورة." }
+];
