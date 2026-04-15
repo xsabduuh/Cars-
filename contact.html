@@ -1,10 +1,483 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>اتصل بنا | EliteDrive</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"><link rel="stylesheet" href="css/common.css"><link rel="stylesheet" href="css/contact.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="EliteDrive - تواصل معنا. يمكنك مراسلتنا لأي استفسار أو حجز. فريق الدعم متاح 24/7.">
+  <title>EliteDrive | اتصل بنا</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2c7da0;
+      --primary-light: #489fb5;
+      --primary-dark: #1f5e7a;
+      --secondary: #d4a373;
+      --secondary-light: #e0b98c;
+      --secondary-dark: #b8824f;
+      --light-bg: #fefcf5;
+      --light-bg-alt: #f4f2eb;
+      --card-bg: #ffffff;
+      --text-dark: #1e2a3a;
+      --text-muted: #5a6e7c;
+      --text-dim: #8a9aa8;
+      --border-light: #e2e0d8;
+      --border-hover: #d4a373;
+      --radius: 4px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.05);
+      --shadow-md: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--border-light); }
+    ::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 10px; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px;
+      border-radius: 2px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+      text-decoration: none; transition: all 0.3s; border: none;
+    }
+    .btn-gold {
+      background: var(--secondary); color: var(--text-dark);
+    }
+    .btn-gold:hover { background: var(--secondary-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,163,115,0.25); }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--secondary); color: var(--secondary);
+    }
+    .btn-outline:hover { background: rgba(212,163,115,0.08); transform: translateY(-2px); }
+
+    /* Navbar */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(254,252,245,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light); transition: all 0.3s;
+    }
+    .navbar.scrolled { background: rgba(254,252,245,0.98); box-shadow: var(--shadow-sm); }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo a {
+      font-size: 1.7rem; font-weight: 900; color: var(--text-dark); text-decoration: none;
+    }
+    .logo span { color: var(--secondary); }
+    .nav-menu {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-menu a {
+      text-decoration: none; color: var(--text-muted); font-weight: 600;
+      transition: 0.3s; position: relative;
+    }
+    .nav-menu a::after {
+      content: ''; position: absolute; bottom: -4px; right: 0;
+      width: 0; height: 1px; background: var(--secondary); transition: width 0.3s;
+    }
+    .nav-menu a:hover, .nav-menu a.active { color: var(--text-dark); }
+    .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
+    .btn-book-nav {
+      background: var(--secondary); color: var(--text-dark) !important;
+      padding: 0.5rem 1.4rem; border-radius: 2px;
+    }
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--border-light);
+      width: 42px; height: 42px; border-radius: var(--radius);
+      font-size: 1.1rem; cursor: pointer; color: var(--text-dark);
+    }
+    .nav-toggle:hover { border-color: var(--secondary); color: var(--secondary); }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--light-bg-alt), var(--light-bg));
+      padding: 3rem 0 2rem; text-align: center;
+    }
+    .page-header h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); }
+    .page-header h1 span { color: var(--secondary); }
+    .page-header p { color: var(--text-muted); margin-top: 0.5rem; }
+
+    /* Contact Section */
+    .contact-section { padding: 3rem 0; }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem;
+      align-items: start;
+    }
+    .contact-info-card {
+      background: var(--card-bg); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-info-card h3 {
+      font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;
+      color: var(--text-dark); position: relative;
+    }
+    .contact-info-card h3::after {
+      content: ''; position: absolute; bottom: -8px; right: 0;
+      width: 50px; height: 2px; background: var(--secondary);
+    }
+    .info-item {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.2rem; padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .info-item i {
+      width: 36px; height: 36px; background: rgba(212,163,115,0.12);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; color: var(--secondary); font-size: 1rem;
+    }
+    .info-item div p:first-child { font-weight: 700; color: var(--text-dark); }
+    .info-item div p:last-child { font-size: 0.85rem; color: var(--text-muted); }
+
+    .contact-form-card {
+      background: var(--card-bg); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-form-card h3 {
+      font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;
+      color: var(--text-dark);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--secondary); margin-bottom: 0.4rem;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 12px 16px; background: var(--light-bg-alt);
+      border: 1px solid var(--border-light); border-radius: var(--radius);
+      font-family: 'Cairo', sans-serif; font-size: 0.9rem;
+      color: var(--text-dark); transition: 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--secondary);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .error-msg {
+      color: #e74c3c; font-size: 0.7rem; margin-top: 0.3rem; display: none;
+    }
+    .btn-submit { width: 100%; justify-content: center; margin-top: 0.5rem; }
+
+    /* Map Section */
+    .map-section { margin-top: 3rem; }
+    .map-container {
+      background: var(--card-bg); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); overflow: hidden;
+      height: 280px;
+    }
+    .map-container iframe {
+      width: 100%; height: 100%; border: none;
+      filter: grayscale(0.1) brightness(0.98);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--light-bg-alt); border-top: 1px solid var(--border-light);
+      padding: 3rem 0 1.5rem; margin-top: 3rem;
+    }
+    .footer-container {
+      max-width: 1280px; margin: auto; display: flex; flex-wrap: wrap;
+      gap: 2rem; padding: 0 2rem;
+    }
+    .footer-col { flex: 1; min-width: 180px; }
+    .footer-col h3, .footer-col h4 { color: var(--text-dark); margin-bottom: 1rem; }
+    .footer-col a { color: var(--text-dim); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: 0.2s; }
+    .footer-col a:hover { color: var(--secondary); }
+    .social-links { display: flex; gap: 0.8rem; margin-top: 1rem; }
+    .social-links a {
+      width: 36px; height: 36px; background: var(--card-bg);
+      border: 1px solid var(--border-light); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); transition: 0.2s;
+    }
+    .social-links a:hover { background: var(--secondary); color: var(--text-dark); border-color: var(--secondary); }
+    .footer-bottom { text-align: center; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: var(--text-dim); }
+
+    /* Floating Buttons */
+    .floaters {
+      position: fixed; bottom: 25px; left: 25px;
+      display: flex; flex-direction: column; gap: 10px; z-index: 999;
+    }
+    .floater {
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; text-decoration: none; transition: 0.3s;
+      box-shadow: var(--shadow-sm); cursor: pointer; border: none;
+    }
+    .floater-wa { background: #25d366; color: #fff; }
+    .floater-call { background: var(--secondary); color: var(--text-dark); }
+    .floater-top { background: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-light); display: none; }
+    .floater:hover { transform: scale(1.08); }
+
+    /* Reveal Animation */
+    .reveal { opacity: 0; transform: translateY(25px); transition: all 0.6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-menu { display: none; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0;
+        background: var(--card-bg); padding: 1.5rem; gap: 1.2rem; border-bottom: 1px solid var(--border-light); }
+      .nav-menu.open { display: flex; }
+      .nav-toggle { display: flex; align-items: center; justify-content: center; }
+      .container { padding: 0 1.2rem; }
+      .page-header h1 { font-size: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
 <body>
-  <nav class="navbar">...</nav>
-  <div class="container contact-page"><div class="contact-info-card"><h3>معلومات التواصل</h3><p><i class="fas fa-map-marker-alt"></i> الدار البيضاء، أنفا</p><p><i class="fas fa-phone"></i> +212 5XX 123 456</p><p><i class="fas fa-envelope"></i> contact@elitedrive.ma</p></div>
-  <form id="contactForm"><h3>أرسل لنا رسالة</h3><input type="text" placeholder="الاسم" id="contactName" required><input type="email" placeholder="البريد الإلكتروني" id="contactEmail" required><textarea placeholder="رسالتك..." id="contactMsg" rows="5" required></textarea><button type="submit" class="btn-primary">إرسال <i class="fas fa-paper-plane"></i></button></form></div>
-  <script src="js/global.js"></script><script src="js/contact.js"></script>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">Elite<span>Drive</span></a></div>
+    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="cars.html">السيارات</a></li>
+      <li><a href="about.html">من نحن</a></li>
+      <li><a href="contact.html" class="active">اتصل بنا</a></li>
+      <li><a href="booking.html" class="btn-book-nav">احجز الآن</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <h1>تواصل <span>معنا</span></h1>
+    <p>فريقنا جاهز للرد على استفساراتكم على مدار الساعة</p>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-layout">
+      <!-- معلومات التواصل -->
+      <div class="contact-info-card reveal">
+        <h3>معلومات التواصل</h3>
+        <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div><p>المقر الرئيسي</p><p>الدار البيضاء، أنفا، شارع محمد الخامس</p></div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-phone-alt"></i>
+          <div><p>الهاتف</p><p>+212 5XX 123 456</p></div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <div><p>البريد الإلكتروني</p><p>contact@elitedrive.ma</p></div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <div><p>ساعات العمل</p><p>الإثنين - الجمعة: 08:00 - 22:00<br>السبت: 09:00 - 20:00</p></div>
+        </div>
+        <div class="info-item">
+          <i class="fab fa-whatsapp"></i>
+          <div><p>واتساب</p><p>+212 6XX 789 012</p></div>
+        </div>
+      </div>
+
+      <!-- نموذج الاتصال -->
+      <div class="contact-form-card reveal">
+        <h3>أرسل لنا رسالة</h3>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>الاسم الكامل</label>
+              <input type="text" id="fullName" placeholder="أحمد العلوي" required>
+              <div class="error-msg" id="nameError">الرجاء إدخال الاسم الكامل</div>
+            </div>
+            <div class="form-group">
+              <label>رقم الهاتف</label>
+              <input type="tel" id="phone" placeholder="+212 6XX XXX XXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <input type="email" id="email" placeholder="exemple@email.com" required>
+            <div class="error-msg" id="emailError">الرجاء إدخال بريد إلكتروني صحيح</div>
+          </div>
+          <div class="form-group">
+            <label>الموضوع</label>
+            <input type="text" id="subject" placeholder="استفسار عن حجز...">
+          </div>
+          <div class="form-group">
+            <label>رسالتك</label>
+            <textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+            <div class="error-msg" id="msgError">الرجاء إدخال نص الرسالة</div>
+          </div>
+          <button type="submit" class="btn btn-gold btn-submit">إرسال الرسالة <i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <!-- خريطة تفاعلية -->
+    <div class="map-section reveal">
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3308.123456789012!2d-7.589843!3d33.573110!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDM0JzIzLjIiTiA3wrAzNScxOS4zIlc!5e0!3m2!1sar!2sma!4v1700000000000!5m2!1sar!2sma" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>EliteDrive</h3>
+      <p>كراء سيارات فاخرة منذ 2020. نقدم أفضل تجربة قيادة بأحدث الموديلات وأفضل الأسعار بالدرهم المغربي.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <a href="index.html">الرئيسية</a>
+      <a href="cars.html">السيارات</a>
+      <a href="about.html">من نحن</a>
+      <a href="booking.html">الحجز</a>
+    </div>
+    <div class="footer-col">
+      <h4>الدعم</h4>
+      <a href="contact.html">اتصل بنا</a>
+      <a href="#">الأسئلة الشائعة</a>
+      <a href="#">الشروط والأحكام</a>
+    </div>
+    <div class="footer-col">
+      <h4>ساعات العمل</h4>
+      <p>الإثنين – الجمعة: 08:00 – 22:00<br>السبت: 09:00 – 20:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 EliteDrive — جميع الحقوق محفوظة | كراء السيارات الفاخرة بالمغرب · الدرهم المغربي</p>
+  </div>
+</footer>
+
+<div class="floaters">
+  <a href="https://wa.me/212612345678" class="floater floater-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="tel:+212512345678" class="floater floater-call"><i class="fas fa-phone-alt"></i></a>
+  <button class="floater floater-top" id="goTop"><i class="fas fa-arrow-up"></i></button>
+</div>
+
+<script>
+  // Reveal animation observer
+  function observeAll() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll(".reveal:not(.in)").forEach(el => observer.observe(el));
+  }
+
+  // Navbar scroll effect
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("navbar");
+    if (window.scrollY > 40) navbar.classList.add("scrolled");
+    else navbar.classList.remove("scrolled");
+    const goTop = document.getElementById("goTop");
+    goTop.style.display = window.scrollY > 300 ? "flex" : "none";
+  });
+  document.getElementById("goTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+  if (navToggle) {
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+      const icon = navToggle.querySelector("i");
+      icon.className = navMenu.classList.contains("open") ? "fas fa-times" : "fas fa-bars";
+    });
+  }
+
+  // Close menu on anchor click
+  document.querySelectorAll(".nav-menu a").forEach(anchor => {
+    anchor.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      if (navToggle) navToggle.querySelector("i").className = "fas fa-bars";
+    });
+  });
+
+  // Form validation and localStorage
+  const form = document.getElementById("contactForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let isValid = true;
+
+      const name = document.getElementById("fullName");
+      const email = document.getElementById("email");
+      const message = document.getElementById("message");
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const msgError = document.getElementById("msgError");
+
+      // Name validation
+      if (!name.value.trim()) {
+        nameError.style.display = "block";
+        isValid = false;
+      } else {
+        nameError.style.display = "none";
+      }
+
+      // Email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim() || !emailPattern.test(email.value)) {
+        emailError.style.display = "block";
+        isValid = false;
+      } else {
+        emailError.style.display = "none";
+      }
+
+      // Message validation
+      if (!message.value.trim()) {
+        msgError.style.display = "block";
+        isValid = false;
+      } else {
+        msgError.style.display = "none";
+      }
+
+      if (isValid) {
+        // Save message to localStorage
+        const messages = JSON.parse(localStorage.getItem("contact_messages") || "[]");
+        messages.push({
+          id: Date.now(),
+          name: name.value.trim(),
+          email: email.value.trim(),
+          phone: document.getElementById("phone").value.trim(),
+          subject: document.getElementById("subject").value.trim(),
+          message: message.value.trim(),
+          date: new Date().toISOString()
+        });
+        localStorage.setItem("contact_messages", JSON.stringify(messages));
+
+        // Show success alert and reset form
+        alert("تم إرسال رسالتك بنجاح. سيتواصل معك فريق الدعم في أقرب وقت.");
+        form.reset();
+      }
+    });
+  }
+
+  observeAll();
+</script>
 </body>
 </html>
