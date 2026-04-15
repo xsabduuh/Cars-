@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EliteDrive | جميع السيارات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/cars.css">
+</head>
+<body>
+  <nav class="navbar"><div class="nav-container"><div class="logo"><a href="index.html"><i class="fas fa-car"></i> Elite<span>Drive</span></a></div><div class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></div><ul class="nav-menu" id="navMenu"><li><a href="index.html">الرئيسية</a></li><li><a href="cars.html" class="active">السيارات</a></li><li><a href="about.html">من نحن</a></li><li><a href="contact.html">اتصل بنا</a></li><li><a href="booking.html" class="btn-book-nav">احجز الآن</a></li></ul></div></nav>
+
+  <section class="page-header"><div class="container"><h1>تشكيلتنا <span>الفاخرة</span></h1><p>اختر السيارة التي تناسب رحلتك</p></div></section>
+
+  <div class="filter-bar container">
+    <div class="filter-group"><label><i class="fas fa-tag"></i> السعر/اليوم</label><select id="priceFilter"><option value="all">الكل</option><option value="low">أقل من 50$</option><option value="mid">50$ - 100$</option><option value="high">أكثر من 100$</option></select></div>
+    <div class="filter-group"><label><i class="fas fa-car"></i> نوع السيارة</label><select id="typeFilter"><option value="all">الكل</option><option value="SUV">SUV</option><option value="Sedan">سيدان</option><option value="Luxury">فاخرة</option></select></div>
+    <button id="resetFilters" class="btn-reset"><i class="fas fa-sync-alt"></i> إعادة تعيين</button>
+  </div>
+
+  <div class="cars-container container"><div class="cars-grid" id="allCarsGrid"></div></div>
+
+  <footer class="footer"><div class="footer-container"><div class="footer-col"><h3>EliteDrive</h3><p>كراء سيارات فاخرة</p></div><div class="footer-col"><ul><li><a href="index.html">الرئيسية</a></li><li><a href="cars.html">السيارات</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 EliteDrive</p></div></footer>
+  <script src="js/data.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/cars.js"></script>
+</body>
+</html>
