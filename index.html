@@ -3,18 +3,640 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="EliteDrive: أفضل خدمة كراء سيارات فاخرة في المغرب. أسعار تنافسية، تأمين شامل، ودعم 24/7. احجز سيارتك الآن واستمتع بتجربة قيادة لا تُنسى.">
-  <meta name="keywords" content="كراء سيارات, تأجير سيارات فاخرة, EliteDrive, سيارة رياضية, SUV, مرسيدس, بي ام دبليو">
+  <meta name="description" content="EliteDrive - أفضل خدمة كراء سيارات فاخرة في المغرب والشرق الأوسط. أسعار تنافسية، تأمين شامل، دعم 24/7. احجز سيارتك الآن واستمتع بقيادة لا تُنسى.">
+  <meta name="keywords" content="كراء سيارات, تأجير سيارات فاخرة, EliteDrive, سيارة رياضية, SUV, مرسيدس, بي ام دبليو, رنج روفر, بورش">
   <meta name="author" content="EliteDrive">
+  <meta name="theme-color" content="#0a0f1c">
   <title>EliteDrive | كراء السيارات الفاخرة - احجز سيارتك اليوم</title>
-  <!-- Favicon (placeholder) -->
+  <!-- Favicon (placeholder using Font Awesome) -->
   <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/rental-car.png">
   <!-- Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Global Styles & Home Styles -->
-  <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/home.css">
+  <style>
+    /* ---------- RESET & GLOBAL ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ---------- TOAST NOTIFICATIONS ---------- */
+    .toast-container {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toast {
+      background: #10b981;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+      direction: rtl;
+      font-size: 0.95rem;
+      animation: slideIn 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .toast.error {
+      background: #ef4444;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* ---------- NAVBAR (ثابت) ---------- */
+    .navbar {
+      background: #0a0f1c;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo a {
+      color: #f5c518;
+      font-size: 1.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: #f5c518;
+      transform: translateY(-2px);
+    }
+
+    .btn-book-nav {
+      background: #f5c518;
+      color: #0a0f1c !important;
+      padding: 0.5rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 700;
+    }
+
+    .btn-book-nav:hover {
+      background: #e0b015;
+      transform: scale(1.02);
+    }
+
+    .nav-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)),
+        url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 850px;
+      padding: 2rem;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-content h1 span {
+      color: #f5c518;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .btn-cta-hero {
+      background: #f5c518;
+      color: #0a0f1c;
+      padding: 14px 38px;
+      border-radius: 50px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-cta-hero:hover {
+      background: #e0b015;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ---------- SEARCH CARD (نموذج بحث متقدم) ---------- */
+    .search-card-wrapper {
+      position: relative;
+      z-index: 3;
+      margin-top: -70px;
+      margin-bottom: 3rem;
+      width: 90%;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-card {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem 2rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(2px);
+    }
+
+    .search-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      color: #0a0f1c;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #f5c518;
+      box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.2);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .btn-search {
+      background: #f5c518;
+      color: #0a0f1c;
+      border: none;
+      width: 100%;
+      padding: 14px;
+      border-radius: 40px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-search:hover {
+      background: #e0b015;
+      transform: scale(1.01);
+    }
+
+    /* ---------- CONTAINER & SECTION HEADER ---------- */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header h2 span {
+      color: #f5c518;
+    }
+
+    .section-header p {
+      color: #475569;
+      font-size: 1.1rem;
+    }
+
+    /* ---------- CARS GRID (سيارات مميزة) ---------- */
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .car-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .car-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2);
+    }
+
+    .car-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+
+    .car-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .car-info {
+      padding: 1.5rem;
+    }
+
+    .car-info h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .car-price {
+      color: #f5c518;
+      font-weight: 800;
+      font-size: 1.3rem;
+      margin: 0.7rem 0;
+    }
+
+    .car-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .btn-details,
+    .btn-book {
+      flex: 1;
+      text-align: center;
+      padding: 0.7rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn-details {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .btn-details:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-book {
+      background: #f5c518;
+      color: #0a0f1c;
+    }
+
+    .btn-book:hover {
+      background: #e0b015;
+      transform: scale(1.02);
+    }
+
+    /* ---------- FEATURES (مميزات الخدمة) ---------- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 28px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-icon {
+      font-size: 2.8rem;
+      color: #f5c518;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h4 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ---------- HOW IT WORKS (خطوات الحجز) ---------- */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .step-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 28px;
+      text-align: center;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .step-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #f5c518;
+      opacity: 0.6;
+      margin-bottom: 1rem;
+    }
+
+    .step-card i {
+      font-size: 2.5rem;
+      color: #0a0f1c;
+      margin-bottom: 1rem;
+    }
+
+    .step-card h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ---------- CTA SECTION (عرض خاص) ---------- */
+    .cta {
+      position: relative;
+      background: linear-gradient(135deg, #0a0f1c 0%, #1e293b 100%);
+      margin-top: 3rem;
+      padding: 5rem 2rem;
+      text-align: center;
+      color: white;
+      border-radius: 0;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-content h2 span {
+      color: #f5c518;
+    }
+
+    .cta-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .btn-cta {
+      background: #f5c518;
+      color: #0a0f1c;
+      padding: 14px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .btn-cta:hover {
+      background: #e0b015;
+      transform: scale(1.03);
+    }
+
+    /* ---------- FOOTER (تذييل احترافي) ---------- */
+    .footer {
+      background: #0a0f1c;
+      color: #94a3b8;
+      padding: 3rem 1rem 1rem;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-col h3,
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-col a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #f5c518;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      background: #1e293b;
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #f5c518;
+      color: #0a0f1c;
+      transform: translateY(-3px);
+    }
+
+    .contact-info li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid #1e293b;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 992px) {
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        background: #0a0f1c;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        gap: 1.2rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .search-card-wrapper {
+        margin-top: -40px;
+      }
+
+      .container {
+        padding: 2rem 1rem;
+      }
+
+      .form-row {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -29,10 +651,10 @@
           <i class="fas fa-bars"></i>
         </div>
         <ul class="nav-menu" id="navMenu">
-          <li><a href="index.html" class="active">الرئيسية</a></li>
-          <li><a href="cars.html">السيارات</a></li>
-          <li><a href="about.html">من نحن</a></li>
-          <li><a href="contact.html">اتصل بنا</a></li>
+          <li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+          <li><a href="cars.html"><i class="fas fa-car-side"></i> السيارات</a></li>
+          <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+          <li><a href="contact.html"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
           <li><a href="booking.html" class="btn-book-nav"><i class="fas fa-calendar-check"></i> احجز الآن</a></li>
         </ul>
       </div>
@@ -40,41 +662,40 @@
   </header>
 
   <main>
-    <!-- ================= HERO SECTION with Search Form ================= -->
+    <!-- ================= HERO SECTION ================= -->
     <section class="hero">
-      <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1>قيادة الفخامة <span>بأسلوب لا يُضاهى</span></h1>
         <p>أكبر تشكيلة من السيارات الفاخرة والرياضية بأفضل الأسعار. خدمة 24/7 ودعم فوري.</p>
-        <!-- زر CTA احجز الآن -->
         <a href="booking.html" class="btn-cta-hero">احجز الآن <i class="fas fa-arrow-left"></i></a>
-      </div>
-      <!-- نموذج بحث متقدم (الموقع + التاريخ) -->
-      <div class="search-card-wrapper">
-        <div class="search-card">
-          <h3><i class="fas fa-search-location"></i> ابحث عن سيارتك</h3>
-          <form id="homeSearchForm">
-            <div class="form-group">
-              <label><i class="fas fa-map-marker-alt"></i> موقع الاستلام</label>
-              <input type="text" placeholder="الدار البيضاء، المطار" value="المطار الدولي" id="pickupLocation" required>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label><i class="fas fa-calendar-day"></i> تاريخ البداية</label>
-                <input type="date" id="startDate" required>
-              </div>
-              <div class="form-group">
-                <label><i class="fas fa-calendar-week"></i> تاريخ النهاية</label>
-                <input type="date" id="endDate" required>
-              </div>
-            </div>
-            <button type="submit" class="btn-search">ابحث عن سيارات <i class="fas fa-chevron-circle-left"></i></button>
-          </form>
-        </div>
       </div>
     </section>
 
-    <!-- ================= CARS LIST (Featured Cars) ================= -->
+    <!-- ================= SEARCH FORM (الموقع + التاريخ) ================= -->
+    <div class="search-card-wrapper">
+      <div class="search-card">
+        <h3><i class="fas fa-search-location"></i> ابحث عن سيارتك</h3>
+        <form id="homeSearchForm">
+          <div class="form-group">
+            <label><i class="fas fa-map-marker-alt"></i> موقع الاستلام</label>
+            <input type="text" placeholder="الدار البيضاء، المطار" value="المطار الدولي" id="pickupLocation" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label><i class="fas fa-calendar-day"></i> تاريخ البداية</label>
+              <input type="date" id="startDate" required>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-calendar-week"></i> تاريخ النهاية</label>
+              <input type="date" id="endDate" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-search">ابحث عن سيارات <i class="fas fa-chevron-circle-left"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= FEATURED CARS SECTION ================= -->
     <section class="cars-list">
       <div class="container">
         <div class="section-header">
@@ -82,7 +703,7 @@
           <p>اختر من بين أحدث الموديلات الفاخرة بأفضل العروض</p>
         </div>
         <div class="cars-grid" id="featuredCarsGrid">
-          <!-- سيتم عرض بطاقات السيارات عبر JavaScript -->
+          <!-- سيتم عرض البطاقات ديناميكياً عبر JavaScript -->
         </div>
       </div>
     </section>
@@ -95,26 +716,12 @@
           <p>خدمات حصرية تجعل تجربتك استثنائية</p>
         </div>
         <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-            <h4>تأمين شامل</h4>
-            <p>تغطية كاملة ضد الحوادث والسرقة مع دعم على مدار الساعة.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-headset"></i></div>
-            <h4>دعم 24/7</h4>
-            <p>فريق متخصص لمساعدتك في أي وقت وأي مكان.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-gas-pump"></i></div>
-            <h4>سيارة ممتلئة بالوقود</h4>
-            <p>تسلم السيارة بخزان ممتلئ وأعدها بنفس الحالة.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
-            <h4>أفضل الأسعار</h4>
-            <p>نضمن أقل الأسعار مع عروض حصرية للحجز المبكر.</p>
-          </div>
+          <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h4>تأمين شامل</h4><p>تغطية كاملة ضد الحوادث والسرقة مع دعم على مدار الساعة.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="fas fa-headset"></i></div><h4>دعم 24/7</h4><p>فريق متخصص لمساعدتك في أي وقت وأي مكان.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="fas fa-gas-pump"></i></div><h4>سيارة ممتلئة بالوقود</h4><p>تسلم السيارة بخزان ممتلئ وأعدها بنفس الحالة.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div><h4>أفضل الأسعار</h4><p>نضمن أقل الأسعار مع عروض حصرية للحجز المبكر.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="fas fa-road"></i></div><h4>كيلومترات غير محدودة</h4><p>استمتع بالقيادة بدون قيود على المسافة.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="fas fa-exchange-alt"></i></div><h4>إلغاء مجاني</h4><p>إلغاء الحجز مجاناً قبل 24 ساعة من الاستلام.</p></div>
         </div>
       </div>
     </section>
@@ -127,58 +734,15 @@
           <p>ثلاث خطوات سهلة وسريعة</p>
         </div>
         <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-number">01</div>
-            <i class="fas fa-car-side"></i>
-            <h4>اختر سيارتك</h4>
-            <p>تصفح مجموعتنا الواسعة من السيارات الفاخرة.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-number">02</div>
-            <i class="fas fa-calendar-check"></i>
-            <h4>حدد التواريخ</h4>
-            <p>اختر تاريخ البداية والنهاية المناسب لرحلتك.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-number">03</div>
-            <i class="fas fa-credit-card"></i>
-            <h4>أكمل الحجز</h4>
-            <p>قم بتأكيد الحجز واستلم سيارتك أينما كنت.</p>
-          </div>
+          <div class="step-card"><div class="step-number">01</div><i class="fas fa-car-side"></i><h4>اختر سيارتك</h4><p>تصفح مجموعتنا الواسعة من السيارات الفاخرة.</p></div>
+          <div class="step-card"><div class="step-number">02</div><i class="fas fa-calendar-check"></i><h4>حدد التواريخ</h4><p>اختر تاريخ البداية والنهاية المناسب لرحلتك.</p></div>
+          <div class="step-card"><div class="step-number">03</div><i class="fas fa-credit-card"></i><h4>أكمل الحجز</h4><p>قم بتأكيد الحجز واستلم سيارتك أينما كنت.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ================= TESTIMONIALS (تقييمات العملاء) ================= -->
-    <section class="testimonials">
-      <div class="container">
-        <div class="section-header">
-          <h2>آراء <span>عملائنا</span></h2>
-          <p>ثقتكم تدفعنا لنكون الأفضل</p>
-        </div>
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-            <p>"خدمة رائعة وسيارات نظيفة جداً. تعامل احترافي وسعر مناسب. سأكرر التجربة بالتأكيد."</p>
-            <div class="customer"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="عميل"><div><h4>أحمد المنصوري</h4><span>عميل دائم</span></div></div>
-          </div>
-          <div class="testimonial-card">
-            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-            <p>"سيارة BMW X5 كانت في حالة ممتازة. التسليم والتسليم كان سلساً جداً. أنصح بهم بشدة."</p>
-            <div class="customer"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="عميلة"><div><h4>سارة الحسيني</h4><span>مسافرة دائمة</span></div></div>
-          </div>
-          <div class="testimonial-card">
-            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-            <p>"فريق الدعم كان متاحاً على مدار الساعة. ساعدوني في تغيير تاريخ الحجز بدون رسوم إضافية. ممتاز!"</p>
-            <div class="customer"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="عميل"><div><h4>يوسف فتحي</h4><span>رجل أعمال</span></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= CTA SECTION (عرض أو خصم) ================= -->
+    <!-- ================= CTA SECTION (عرض خاص) ================= -->
     <section class="cta">
-      <div class="cta-overlay"></div>
       <div class="cta-content">
         <h2>خصم يصل إلى <span>20%</span> للحجوزات المبكرة!</h2>
         <p>احجز الآن لمدة 7 أيام أو أكثر واحصل على خصم فوري. عرض محدود.</p>
@@ -191,7 +755,7 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-col">
-        <h3><i class="fas fa-car"></i> Elite<span>Drive</span></h3>
+        <h3><i class="fas fa-car"></i> Elite<span style="color:#f5c518;">Drive</span></h3>
         <p>أفضل تجربة لكراء السيارات الفاخرة في المغرب والشرق الأوسط. الجودة والثقة منذ 2020.</p>
         <div class="social-links">
           <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -228,9 +792,102 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/global.js"></script>
-  <script src="js/home.js"></script>
+  <script>
+    // ---------- DATA (سيارات وهمية عالية الجودة) ----------
+    const carData = [
+      { id: 1, name: "Mercedes-Benz S-Class", type: "Luxury", pricePerDay: 120, image: "https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=600", seats: 5, transmission: "أوتوماتيك", fuel: "بنزين", description: "فخامة لا مثيل لها وأداء استثنائي." },
+      { id: 2, name: "BMW X5", type: "SUV", pricePerDay: 85, image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600", seats: 5, transmission: "أوتوماتيك", fuel: "ديزل", description: "سيارة رياضية متعددة الاستخدامات." },
+      { id: 3, name: "Audi A6", type: "Sedan", pricePerDay: 70, image: "https://images.unsplash.com/photo-1606664515524-8b6b4b2e1b5b?w=600", seats: 5, transmission: "أوتوماتيك", fuel: "بنزين", description: "أناقة وراحة للسفر الطويل." },
+      { id: 4, name: "Range Rover Velar", type: "SUV", pricePerDay: 150, image: "https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=600", seats: 5, transmission: "أوتوماتيك", fuel: "بنزين", description: "فاخرة وقوية لكل التضاريس." },
+      { id: 5, name: "Porsche 911", type: "Luxury", pricePerDay: 250, image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600", seats: 4, transmission: "أوتوماتيك", fuel: "بنزين", description: "رياضية خارقة." },
+      { id: 6, name: "Tesla Model 3", type: "Sedan", pricePerDay: 95, image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600", seats: 5, transmission: "كهربائي", fuel: "كهرباء", description: "صديقة للبيئة وتقنية متطورة." }
+    ];
+
+    // عرض السيارات المميزة (أول 3 سيارات)
+    function displayFeaturedCars() {
+      const grid = document.getElementById("featuredCarsGrid");
+      if (!grid) return;
+      const featured = carData.slice(0, 3);
+      grid.innerHTML = "";
+      featured.forEach(car => {
+        const card = document.createElement("div");
+        card.className = "car-card";
+        card.innerHTML = `
+          <img src="${car.image}" alt="${car.name}" loading="lazy">
+          <div class="car-info">
+            <h3>${car.name}</h3>
+            <div class="car-price">${car.pricePerDay} $ / اليوم</div>
+            <div class="car-actions">
+              <a href="car-details.html?id=${car.id}" class="btn-details">تفاصيل</a>
+              <a href="booking.html?car=${car.id}" class="btn-book">حجز</a>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // نظام الإشعارات (Toast)
+    function showToast(message, type = "success") {
+      let container = document.querySelector(".toast-container");
+      if (!container) {
+        container = document.createElement("div");
+        container.className = "toast-container";
+        document.body.appendChild(container);
+      }
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+      toast.innerText = message;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // معالجة نموذج البحث (حفظ البيانات في localStorage)
+    function initSearchForm() {
+      const form = document.getElementById("homeSearchForm");
+      if (!form) return;
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+        const location = document.getElementById("pickupLocation").value;
+
+        if (!startDate || !endDate) {
+          showToast("الرجاء إدخال تاريخ البداية والنهاية", "error");
+          return;
+        }
+        if (new Date(startDate) >= new Date(endDate)) {
+          showToast("تاريخ النهاية يجب أن يكون بعد تاريخ البداية", "error");
+          return;
+        }
+        // تخزين بيانات البحث في localStorage لاستخدامها في صفحة السيارات
+        localStorage.setItem("searchStart", startDate);
+        localStorage.setItem("searchEnd", endDate);
+        localStorage.setItem("searchLocation", location);
+        showToast("جاري البحث عن السيارات المتاحة...");
+        setTimeout(() => {
+          window.location.href = "cars.html";
+        }, 800);
+      });
+    }
+
+    // تبديل القائمة في الشاشات الصغيرة
+    function initMobileNav() {
+      const toggle = document.getElementById("navToggle");
+      const menu = document.getElementById("navMenu");
+      if (toggle && menu) {
+        toggle.addEventListener("click", () => {
+          menu.classList.toggle("active");
+        });
+      }
+    }
+
+    // تشغيل جميع الوظائف عند تحميل الصفحة
+    document.addEventListener("DOMContentLoaded", () => {
+      displayFeaturedCars();
+      initSearchForm();
+      initMobileNav();
+    });
+  </script>
 </body>
 </html>
