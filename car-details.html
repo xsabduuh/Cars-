@@ -2,23 +2,430 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تفاصيل السيارة | EliteDrive</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/car-details.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="EliteDrive - تفاصيل السيارة. تعرف على المواصفات والأسعار بالدرهم المغربي واحجز سيارتك الفاخرة الآن.">
+  <title>EliteDrive | تفاصيل السيارة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2c7da0;
+      --primary-light: #489fb5;
+      --primary-dark: #1f5e7a;
+      --secondary: #d4a373;
+      --secondary-light: #e0b98c;
+      --secondary-dark: #b8824f;
+      --light-bg: #fefcf5;
+      --light-bg-alt: #f4f2eb;
+      --card-bg: #ffffff;
+      --text-dark: #1e2a3a;
+      --text-muted: #5a6e7c;
+      --text-dim: #8a9aa8;
+      --border-light: #e2e0d8;
+      --border-hover: #d4a373;
+      --radius: 4px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.05);
+      --shadow-md: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--border-light); }
+    ::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 10px; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px;
+      border-radius: 2px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+      text-decoration: none; transition: all 0.3s; border: none;
+    }
+    .btn-gold {
+      background: var(--secondary); color: var(--text-dark);
+    }
+    .btn-gold:hover { background: var(--secondary-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,163,115,0.25); }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--secondary); color: var(--secondary);
+    }
+    .btn-outline:hover { background: rgba(212,163,115,0.08); transform: translateY(-2px); }
+    .btn-sm { padding: 8px 18px; font-size: 0.8rem; }
+
+    /* Navbar */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(254,252,245,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light); transition: all 0.3s;
+    }
+    .navbar.scrolled { background: rgba(254,252,245,0.98); box-shadow: var(--shadow-sm); }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo a {
+      font-size: 1.7rem; font-weight: 900; color: var(--text-dark); text-decoration: none;
+    }
+    .logo span { color: var(--secondary); }
+    .nav-menu {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-menu a {
+      text-decoration: none; color: var(--text-muted); font-weight: 600;
+      transition: 0.3s; position: relative;
+    }
+    .nav-menu a::after {
+      content: ''; position: absolute; bottom: -4px; right: 0;
+      width: 0; height: 1px; background: var(--secondary); transition: width 0.3s;
+    }
+    .nav-menu a:hover, .nav-menu a.active { color: var(--text-dark); }
+    .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
+    .btn-book-nav {
+      background: var(--secondary); color: var(--text-dark) !important;
+      padding: 0.5rem 1.4rem; border-radius: 2px;
+    }
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--border-light);
+      width: 42px; height: 42px; border-radius: var(--radius);
+      font-size: 1.1rem; cursor: pointer; color: var(--text-dark);
+    }
+    .nav-toggle:hover { border-color: var(--secondary); color: var(--secondary); }
+
+    /* Detail Section */
+    .detail-section { padding: 3rem 0; }
+    .detail-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      background: var(--card-bg); border-radius: var(--radius-lg);
+      padding: 2rem; border: 1px solid var(--border-light);
+      margin-bottom: 2rem;
+    }
+    /* Gallery */
+    .gallery-main {
+      width: 100%; height: 320px; overflow: hidden; border-radius: var(--radius-lg);
+      margin-bottom: 1rem; background: var(--light-bg-alt);
+    }
+    .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-thumbs {
+      display: flex; gap: 0.8rem; overflow-x: auto; padding-bottom: 0.5rem;
+    }
+    .thumb {
+      width: 80px; height: 60px; object-fit: cover; border-radius: var(--radius);
+      cursor: pointer; opacity: 0.6; transition: 0.2s; border: 2px solid transparent;
+    }
+    .thumb.active { opacity: 1; border-color: var(--secondary); }
+    .thumb:hover { opacity: 1; }
+    /* Info */
+    .car-make {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--secondary); margin-bottom: 0.5rem;
+    }
+    .car-name { font-size: 2rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.5rem; }
+    .car-stars { color: var(--secondary); margin-bottom: 1rem; font-size: 0.9rem; }
+    .car-price {
+      font-size: 2rem; font-weight: 800; color: var(--secondary); margin: 1rem 0;
+    }
+    .car-price small { font-size: 0.8rem; color: var(--text-dim); font-weight: 400; }
+    .specs-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+      background: var(--light-bg-alt); padding: 1.2rem; border-radius: var(--radius-lg);
+      margin: 1rem 0;
+    }
+    .spec-item {
+      display: flex; align-items: center; gap: 10px; font-size: 0.9rem;
+    }
+    .spec-item i { width: 24px; color: var(--secondary); font-size: 1.1rem; }
+    .description { color: var(--text-muted); line-height: 1.8; margin: 1rem 0; }
+    .action-buttons { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+    /* Similar Cars */
+    .similar-title { font-size: 1.6rem; font-weight: 800; margin: 2rem 0 1.5rem; }
+    .similar-title span { color: var(--secondary); }
+    .similar-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
+    }
+    .similar-card {
+      background: var(--card-bg); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); overflow: hidden; transition: 0.3s;
+    }
+    .similar-card:hover { transform: translateY(-4px); border-color: var(--border-hover); }
+    .similar-card img { width: 100%; height: 150px; object-fit: cover; }
+    .similar-card-body { padding: 1rem; }
+    .similar-card-body h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .similar-price { color: var(--secondary); font-weight: 700; font-size: 0.9rem; }
+
+    /* Footer */
+    .footer {
+      background: var(--light-bg-alt); border-top: 1px solid var(--border-light);
+      padding: 3rem 0 1.5rem; margin-top: 3rem;
+    }
+    .footer-container {
+      max-width: 1280px; margin: auto; display: flex; flex-wrap: wrap;
+      gap: 2rem; padding: 0 2rem;
+    }
+    .footer-col { flex: 1; min-width: 180px; }
+    .footer-col h3, .footer-col h4 { color: var(--text-dark); margin-bottom: 1rem; }
+    .footer-col a { color: var(--text-dim); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: 0.2s; }
+    .footer-col a:hover { color: var(--secondary); }
+    .social-links { display: flex; gap: 0.8rem; margin-top: 1rem; }
+    .social-links a {
+      width: 36px; height: 36px; background: var(--card-bg);
+      border: 1px solid var(--border-light); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); transition: 0.2s;
+    }
+    .social-links a:hover { background: var(--secondary); color: var(--text-dark); border-color: var(--secondary); }
+    .footer-bottom { text-align: center; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: var(--text-dim); }
+
+    /* Floating Buttons */
+    .floaters {
+      position: fixed; bottom: 25px; left: 25px;
+      display: flex; flex-direction: column; gap: 10px; z-index: 999;
+    }
+    .floater {
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; text-decoration: none; transition: 0.3s;
+      box-shadow: var(--shadow-sm); cursor: pointer; border: none;
+    }
+    .floater-wa { background: #25d366; color: #fff; }
+    .floater-call { background: var(--secondary); color: var(--text-dark); }
+    .floater-top { background: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-light); display: none; }
+    .floater:hover { transform: scale(1.08); }
+
+    /* Reveal Animation */
+    .reveal { opacity: 0; transform: translateY(25px); transition: all 0.6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .detail-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-menu { display: none; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0;
+        background: var(--card-bg); padding: 1.5rem; gap: 1.2rem; border-bottom: 1px solid var(--border-light); }
+      .nav-menu.open { display: flex; }
+      .nav-toggle { display: flex; align-items: center; justify-content: center; }
+      .container { padding: 0 1.2rem; }
+      .detail-section { padding: 2rem 0; }
+      .detail-grid { padding: 1.2rem; }
+      .car-name { font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-  <nav class="navbar"><div class="nav-container"><div class="logo"><a href="index.html">EliteDrive</a></div><div class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></div><ul class="nav-menu" id="navMenu"><li><a href="index.html">الرئيسية</a></li><li><a href="cars.html">السيارات</a></li><li><a href="booking.html">احجز الآن</a></li></ul></div></nav>
 
-  <div class="container detail-container" id="carDetailContent">
-    <!-- dynamic content loaded via JS -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">Elite<span>Drive</span></a></div>
+    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="cars.html">السيارات</a></li>
+      <li><a href="about.html">من نحن</a></li>
+      <li><a href="contact.html">اتصل بنا</a></li>
+      <li><a href="booking.html" class="btn-book-nav">احجز الآن</a></li>
+    </ul>
   </div>
+</nav>
 
-  <footer class="footer">...</footer>
-  <script src="js/data.js"></script>
-  <script src="js/global.js"></script>
-  <script src="js/car-details.js"></script>
+<section class="detail-section">
+  <div class="container" id="carDetailContent">
+    <!-- سيتم ملء المحتوى ديناميكياً عبر JavaScript -->
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>EliteDrive</h3>
+      <p>كراء سيارات فاخرة منذ 2020. نقدم أفضل تجربة قيادة بأحدث الموديلات وأفضل الأسعار بالدرهم المغربي.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <a href="index.html">الرئيسية</a>
+      <a href="cars.html">السيارات</a>
+      <a href="about.html">من نحن</a>
+      <a href="booking.html">الحجز</a>
+    </div>
+    <div class="footer-col">
+      <h4>الدعم</h4>
+      <a href="contact.html">اتصل بنا</a>
+      <a href="#">الأسئلة الشائعة</a>
+      <a href="#">الشروط والأحكام</a>
+    </div>
+    <div class="footer-col">
+      <h4>ساعات العمل</h4>
+      <p>الإثنين – الجمعة: 08:00 – 22:00<br>السبت: 09:00 – 20:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 EliteDrive — جميع الحقوق محفوظة | كراء السيارات الفاخرة بالمغرب · الدرهم المغربي</p>
+  </div>
+</footer>
+
+<div class="floaters">
+  <a href="https://wa.me/212612345678" class="floater floater-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="tel:+212512345678" class="floater floater-call"><i class="fas fa-phone-alt"></i></a>
+  <button class="floater floater-top" id="goTop"><i class="fas fa-arrow-up"></i></button>
+</div>
+
+<script>
+  // بيانات السيارات الكاملة
+  const carsDatabase = [
+    { id: 1, make: "Mercedes-Benz", name: "S-Class 450", price: 1200, rating: 4.9, reviews: 87, badge: "الأكثر طلباً", image: "https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=800&auto=format", images: ["https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=800", "https://images.unsplash.com/photo-1606664515524-8b6b4b2e1b5b?w=800", "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800"], transmission: "أوتوماتيك", fuel: "بنزين", seats: 5, type: "Luxury", description: "سيارة S-Class الفاخرة تجمع بين الأناقة والتكنولوجيا المتطورة. مقصورة داخلية جلدية، نظام صوتي محيطي، ومقاعد قابلة للتدليك. تجربة قيادة لا تُضاهى." },
+    { id: 2, make: "BMW", name: "X5 xDrive40i", price: 850, rating: 4.7, reviews: 64, badge: "جديد", image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=800&auto=format", images: ["https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=800", "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800"], transmission: "أوتوماتيك", fuel: "ديزل", seats: 7, type: "SUV", description: "BMW X5 تجمع بين الأداء الرياضي والرحابة العائلية. دفع رباعي، سقف بانورامي، وأنظمة أمان متقدمة." },
+    { id: 3, make: "Land Rover", name: "Range Rover Velar", price: 1500, rating: 4.9, reviews: 52, badge: "فاخرة", image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&auto=format", images: ["https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800", "https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=800"], transmission: "أوتوماتيك", fuel: "بنزين", seats: 5, type: "SUV", description: "رينج روفر فيلار: تصميم أنيق، تقنيات حديثة، وراحة فائقة على جميع التضاريس." }
+  ];
+
+  function getCarById(id) {
+    return carsDatabase.find(c => c.id == id);
+  }
+
+  function displayCarDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const carId = urlParams.get('id');
+    const car = getCarById(carId);
+    const container = document.getElementById("carDetailContent");
+    if (!car) {
+      container.innerHTML = '<div class="detail-grid" style="text-align:center; padding:3rem;">عذراً، لم يتم العثور على السيارة المطلوبة</div>';
+      return;
+    }
+
+    // Build stars
+    const stars = "★".repeat(Math.floor(car.rating)) + (car.rating % 1 >= 0.5 ? "½" : "");
+    // Gallery thumbs
+    let thumbsHtml = '';
+    car.images.forEach((img, idx) => {
+      thumbsHtml += `<img src="${img}" class="thumb ${idx === 0 ? 'active' : ''}" data-img="${img}" alt="صورة ${idx+1}">`;
+    });
+
+    const html = `
+      <div class="detail-grid reveal">
+        <div>
+          <div class="gallery-main">
+            <img id="mainImage" src="${car.images[0]}" alt="${car.name}">
+          </div>
+          <div class="gallery-thumbs" id="thumbContainer">
+            ${thumbsHtml}
+          </div>
+        </div>
+        <div>
+          <div class="car-make">${car.make}</div>
+          <div class="car-name">${car.name}</div>
+          <div class="car-stars">${stars} <span>(${car.reviews} تقييم)</span></div>
+          <div class="car-price">${car.price.toLocaleString()} درهم <small>/ اليوم</small></div>
+          <div class="specs-grid">
+            <div class="spec-item"><i class="fas fa-cogs"></i> <span>ناقل الحركة: ${car.transmission}</span></div>
+            <div class="spec-item"><i class="fas fa-gas-pump"></i> <span>الوقود: ${car.fuel}</span></div>
+            <div class="spec-item"><i class="fas fa-users"></i> <span>المقاعد: ${car.seats}</span></div>
+            <div class="spec-item"><i class="fas fa-car"></i> <span>الفئة: ${car.type === 'Luxury' ? 'فاخرة' : car.type === 'SUV' ? 'SUV' : 'سيدان'}</span></div>
+          </div>
+          <div class="description">
+            <p>${car.description}</p>
+            <p style="margin-top:0.5rem;"><i class="fas fa-check-circle" style="color: var(--secondary);"></i> تأمين شامل ضد الحوادث والسرقة</p>
+            <p><i class="fas fa-check-circle" style="color: var(--secondary);"></i> إلغاء مجاني حتى 24 ساعة قبل الاستلام</p>
+            <p><i class="fas fa-check-circle" style="color: var(--secondary);"></i> كيلومترات غير محدودة</p>
+          </div>
+          <div class="action-buttons">
+            <a href="booking.html?car=${car.id}" class="btn btn-gold">احجز الآن <i class="fas fa-arrow-left"></i></a>
+            <a href="cars.html" class="btn btn-outline">العودة إلى السيارات</a>
+          </div>
+        </div>
+      </div>
+      <div class="similar-title reveal">سيارات <span>مشابهة</span></div>
+      <div class="similar-grid" id="similarCars"></div>
+    `;
+    container.innerHTML = html;
+
+    // Gallery thumb click handler
+    const mainImg = document.getElementById("mainImage");
+    const thumbs = document.querySelectorAll(".thumb");
+    thumbs.forEach(thumb => {
+      thumb.addEventListener("click", () => {
+        mainImg.src = thumb.dataset.img;
+        thumbs.forEach(t => t.classList.remove("active"));
+        thumb.classList.add("active");
+      });
+    });
+
+    // عرض سيارات مشابهة (نفس الفئة)
+    const similar = carsDatabase.filter(c => c.type === car.type && c.id !== car.id).slice(0, 3);
+    const similarContainer = document.getElementById("similarCars");
+    if (similarContainer) {
+      if (similar.length === 0) {
+        similarContainer.innerHTML = '<p style="color: var(--text-muted);">لا توجد سيارات مشابهة حالياً</p>';
+      } else {
+        similarContainer.innerHTML = similar.map(c => `
+          <div class="similar-card reveal">
+            <img src="${c.image}" alt="${c.name}">
+            <div class="similar-card-body">
+              <h4>${c.name}</h4>
+              <div class="similar-price">${c.price.toLocaleString()} درهم/يوم</div>
+              <a href="car-details.html?id=${c.id}" class="btn btn-outline btn-sm" style="margin-top:0.5rem;">عرض التفاصيل</a>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+    observeAll();
+  }
+
+  // Observer for reveal animation
+  function observeAll() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll(".reveal:not(.in)").forEach(el => observer.observe(el));
+  }
+
+  // Navbar scroll effect
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("navbar");
+    if (window.scrollY > 40) navbar.classList.add("scrolled");
+    else navbar.classList.remove("scrolled");
+    const goTop = document.getElementById("goTop");
+    goTop.style.display = window.scrollY > 300 ? "flex" : "none";
+  });
+  document.getElementById("goTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+  if (navToggle) {
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+      const icon = navToggle.querySelector("i");
+      icon.className = navMenu.classList.contains("open") ? "fas fa-times" : "fas fa-bars";
+    });
+  }
+
+  // Smooth close on anchor click
+  document.querySelectorAll(".nav-menu a").forEach(anchor => {
+    anchor.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      if (navToggle) navToggle.querySelector("i").className = "fas fa-bars";
+    });
+  });
+
+  displayCarDetails();
+</script>
 </body>
 </html>
