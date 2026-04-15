@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Elite Drive | كراء السيارات الفاخرة</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Global Styles (common for all pages) -->
+  <link rel="stylesheet" href="css/common.css">
+  <!-- Page specific CSS will be added per page -->
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <!-- Fixed Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html"><i class="fas fa-car"></i> Elite<span>Drive</span></a>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+        <li><a href="cars.html"><i class="fas fa-car-side"></i> السيارات</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+        <li><a href="booking.html" class="btn-book-nav"><i class="fas fa-calendar-check"></i> احجز الآن</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Banner Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>قيادة الفخامة <span>بأسلوب لا يُضاهى</span></h1>
+      <p>أفضل مجموعة سيارات فاخرة ورياضية بأفضل الأسعار. احجز سيارتك اليوم واستمتع برحلة لا تُنسى.</p>
+      <div class="hero-buttons">
+        <a href="cars.html" class="btn-primary">استكشف السيارات <i class="fas fa-arrow-right"></i></a>
+        <a href="booking.html" class="btn-outline">حجز سريع <i class="fas fa-calendar-alt"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Form Section (Quick Booking) -->
+  <div class="search-card-wrapper">
+    <div class="search-card">
+      <h3><i class="fas fa-search-location"></i> ابحث عن سيارتك</h3>
+      <form id="homeSearchForm">
+        <div class="form-group">
+          <label><i class="fas fa-map-marker-alt"></i> موقع الاستلام</label>
+          <input type="text" placeholder="الدار البيضاء، الدار البيضاء" value="المطار الدولي">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-calendar-day"></i> تاريخ البداية</label>
+            <input type="date" id="startDate" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-calendar-week"></i> تاريخ النهاية</label>
+            <input type="date" id="endDate" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-search">بحث عن سيارات <i class="fas fa-chevron-circle-right"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Featured Cars Section -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>سياراتنا <span>المميزة</span></h2>
+        <p>اختر من بين أحدث الموديلات الفاخرة بأفضل العروض</p>
+      </div>
+      <div class="cars-grid" id="featuredCarsGrid">
+        <!-- dynamic featured cars will be injected via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-us">
+    <div class="container">
+      <div class="section-header">
+        <h2>لماذا <span>EliteDrive</span>؟</h2>
+        <p>خدمات احترافية تجعل تجربة الكراء استثنائية</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+          <h4>تأمين شامل</h4>
+          <p>جميع عقود الكراء تتضمن تأمين كامل ضد الحوادث والسرقة.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-headset"></i></div>
+          <h4>دعم 24/7</h4>
+          <p>فريق دعم متخصص لمساعدتك في أي وقت وأي مكان.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-gas-pump"></i></div>
+          <h4>سيارة ممتلئة بالوقود</h4>
+          <p>تسلم السيارة بخزان ممتلئ وأعدها بنفس الحالة.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <h4>أفضل الأسعار</h4>
+          <p>نضمن أقل الأسعار مع عروض حصرية للمدة الطويلة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3><i class="fas fa-car"></i> Elite<span>Drive</span></h3>
+        <p>أفضل تجربة لكراء السيارات الفاخرة في المغرب والشرق الأوسط. الجودة والثقة منذ 2020.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="cars.html">جميع السيارات</a></li>
+          <li><a href="about.html">من نحن</a></li>
+          <li><a href="contact.html">الدعم</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>معلومات الاتصال</h4>
+        <ul class="contact-info">
+          <li><i class="fas fa-phone-alt"></i> +212 5XX 123 456</li>
+          <li><i class="fas fa-envelope"></i> support@elitedrive.ma</li>
+          <li><i class="fas fa-map-marker-alt"></i> 23 Bd Mohammed V, Casablanca</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>ساعات العمل</h4>
+        <p>الإثنين - الجمعة: 08:00 - 22:00<br> السبت: 09:00 - 20:00<br> الأحد: 10:00 - 18:00</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 EliteDrive - جميع الحقوق محفوظة | تصميم احترافي لكراء السيارات</p>
+    </div>
+  </footer>
+
+  <!-- Scripts: Data, Global helpers, Home specific JS -->
+  <script src="js/data.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
