@@ -3,53 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="EliteDrive - كراء سيارات فاخرة بأسلوب عصري. أسعار تنافسية، تأمين شامل، ودعم 24/7.">
-  <meta name="keywords" content="كراء سيارات, تأجير, EliteDrive, مرسيدس, بي ام دبليو">
-  <meta name="author" content="EliteDrive">
-  <title>EliteDrive | كراء السيارات الفاخرة - الوضع النهاري</title>
-  <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/rental-car.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="EliteDrive - كراء سيارات فاخرة في المغرب. أفضل العروض والأسعار بالدرهم المغربي. احجز سيارتك الآن.">
+  <title>EliteDrive | كراء السيارات الفاخرة - بالدرهم المغربي</title>
+  <!-- Google Fonts: Cairo (عربي واضح) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* ---------- RESET & GLOBAL ---------- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f5f7fc;
-      color: #1f2937;
-      overflow-x: hidden;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f4f7fc; /* رمادي فاتح مائل للأزرق */
+      color: #1e2a3e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+    /* custom scroll */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #f39c12; border-radius: 10px; }
+
+    /* ---------- TYPOGRAPHY ---------- */
+    h1, h2, h3, h4 {
+      font-weight: 800;
+      color: #0f172a; /* أسود قوي */
+    }
+    p, .secondary-text {
+      color: #5a6874; /* رمادي متوسط */
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    section {
+      padding: 5rem 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-header h2 {
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-header h2 span {
+      color: #f39c12; /* برتقالي ذهبي */
+    }
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 3px;
+      background: #f39c12;
+      border-radius: 3px;
     }
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+    /* ---------- BUTTONS ---------- */
+    .btn-primary {
+      background: #f39c12;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+      font-size: 1rem;
     }
-    ::-webkit-scrollbar-track {
-      background: #e4e7eb;
-      border-radius: 10px;
+    .btn-primary:hover {
+      background: #e67e22;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3);
     }
-    ::-webkit-scrollbar-thumb {
-      background: #3b82f6;
-      border-radius: 10px;
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #f39c12;
+      color: #f39c12;
+      padding: 10px 26px;
+      border-radius: 40px;
+      font-weight: 700;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline:hover {
+      background: #f39c12;
+      color: white;
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: #2c3e50;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .btn-secondary:hover {
+      background: #1a2a3a;
     }
 
-    /* ========== NAVBAR ========== */
+    /* ---------- HEADER (NAVBAR) ---------- */
     .navbar {
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
+      background: white;
       padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-      border-bottom: 1px solid #eef2f6;
+      transition: box-shadow 0.3s;
     }
-
+    .navbar.scrolled {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
     .nav-container {
       display: flex;
       justify-content: space-between;
@@ -57,235 +135,174 @@
       max-width: 1400px;
       margin: 0 auto;
     }
-
     .logo a {
-      color: #1e3a8a;
       font-size: 1.8rem;
-      font-weight: 800;
+      font-weight: 900;
+      color: #0f172a;
       text-decoration: none;
     }
     .logo span {
-      color: #f59e0b;
+      color: #f39c12;
     }
-
     .nav-menu {
       display: flex;
       gap: 2rem;
       list-style: none;
     }
     .nav-menu a {
-      color: #334155;
       text-decoration: none;
-      font-weight: 500;
+      color: #4a5568;
+      font-weight: 600;
       transition: 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      position: relative;
     }
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #f59e0b;
-      transition: width 0.3s;
-    }
-    .nav-menu a:hover::after,
-    .nav-menu a.active::after {
-      width: 100%;
-    }
-    .nav-menu a:hover,
-    .nav-menu a.active {
-      color: #f59e0b;
+    .nav-menu a:hover {
+      color: #f39c12;
     }
     .btn-book-nav {
-      background: #f59e0b;
+      background: #f39c12;
       color: white !important;
       padding: 0.5rem 1.4rem;
       border-radius: 40px;
-      font-weight: 700;
     }
-    .btn-book-nav::after { display: none; }
     .btn-book-nav:hover {
-      background: #d97706;
-      transform: scale(1.02);
+      background: #e67e22;
     }
     .nav-toggle {
       display: none;
-      font-size: 1.8rem;
-      color: #1f2937;
+      font-size: 1.6rem;
       cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .nav-toggle.active {
-      transform: rotate(90deg);
+      color: #0f172a;
     }
 
-    /* ========== HERO ========== */
+    /* ---------- HERO SECTION ---------- */
     .hero {
-      position: relative;
-      min-height: 85vh;
+      background: linear-gradient(135deg, #ffffff, #eef2f9);
+      padding: 4rem 0;
+    }
+    .hero .container {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-      border-bottom: 1px solid #e2e8f0;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
     }
     .hero-content {
-      max-width: 900px;
-      padding: 2rem;
-      animation: fadeUp 0.8s ease;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      flex: 1;
     }
     .hero-content h1 {
-      font-size: 3.8rem;
-      font-weight: 800;
-      color: #0f172a;
+      font-size: 3.2rem;
       margin-bottom: 1rem;
     }
     .hero-content h1 span {
-      color: #f59e0b;
+      color: #f39c12;
     }
     .hero-content p {
-      font-size: 1.2rem;
-      color: #475569;
+      font-size: 1.1rem;
       margin-bottom: 2rem;
     }
-    .btn-cta-hero {
-      background: #f59e0b;
-      color: white;
-      padding: 14px 38px;
-      border-radius: 50px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2);
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
-    .btn-cta-hero:hover {
-      background: #d97706;
-      transform: translateY(-4px);
-      box-shadow: 0 15px 30px rgba(245, 158, 11, 0.3);
+    .hero-image {
+      flex: 1;
+      text-align: center;
+    }
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 32px;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
     }
 
-    /* ========== SEARCH CARD ========== */
-    .search-card-wrapper {
-      position: relative;
-      z-index: 3;
-      margin-top: -60px;
-      margin-bottom: 3rem;
-      width: 90%;
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
+    /* ---------- SEARCH SECTION (CARD) ---------- */
+    .search-section {
+      background: #f4f7fc;
+      padding-top: 0;
     }
     .search-card {
       background: white;
       border-radius: 32px;
       padding: 2rem;
-      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
       border: 1px solid #eef2f6;
     }
-    .search-card h3 {
-      font-size: 1.6rem;
-      margin-bottom: 1.5rem;
-      color: #1e3a8a;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .search-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      align-items: end;
     }
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-    .form-group label {
+    .input-group label {
       display: block;
-      margin-bottom: 8px;
       font-weight: 600;
-      color: #334155;
+      margin-bottom: 6px;
+      color: #2c3e50;
     }
-    .form-group input, .form-group select {
+    .input-group input, .input-group select {
       width: 100%;
-      padding: 14px 18px;
-      background: #f9fafb;
+      padding: 12px 16px;
       border: 1px solid #e2e8f0;
       border-radius: 20px;
-      font-size: 1rem;
-      transition: 0.2s;
-      color: #1f2937;
+      font-family: 'Cairo', sans-serif;
+      background: white;
     }
-    .form-group input:focus, .form-group select:focus {
+    .input-group input:focus, .input-group select:focus {
       outline: none;
-      border-color: #f59e0b;
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
-    }
-    .form-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .form-row .form-group {
-      flex: 1;
-    }
-    .price-estimate {
-      background: #fef9e8;
-      padding: 12px;
-      border-radius: 20px;
-      text-align: center;
-      margin: 15px 0;
-      font-weight: bold;
-      color: #b45309;
-      font-size: 1rem;
+      border-color: #f39c12;
     }
     .btn-search {
-      background: #f59e0b;
+      background: #f39c12;
       color: white;
       border: none;
-      width: 100%;
-      padding: 14px;
+      padding: 12px 24px;
       border-radius: 40px;
-      font-weight: 800;
-      font-size: 1.1rem;
+      font-weight: 700;
       cursor: pointer;
       transition: 0.3s;
     }
     .btn-search:hover {
-      background: #d97706;
-      transform: scale(1.01);
+      background: #e67e22;
     }
 
-    /* ========== CONTAINER & SECTIONS ========== */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
+    /* ---------- OFFERS SECTION (3 CARDS) ---------- */
+    .offers-section {
+      background: #ffffff;
     }
-    .section-header {
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .offer-card {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem;
       text-align: center;
-      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border: 1px solid #edf2f7;
+      transition: all 0.3s;
     }
-    .section-header h2 {
-      font-size: 2.4rem;
-      font-weight: 800;
-      color: #0f172a;
+    .offer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.08);
     }
-    .section-header h2 span {
-      color: #f59e0b;
+    .offer-icon {
+      font-size: 2.8rem;
+      color: #f39c12;
+      margin-bottom: 1rem;
     }
-    .section-header p {
-      color: #64748b;
-      font-size: 1.1rem;
+    .offer-card h3 {
+      margin-bottom: 0.5rem;
+    }
+    .offer-card p {
+      margin-bottom: 1.5rem;
     }
 
-    /* ========== CARS GRID ========== */
+    /* ---------- FEATURED CARS ---------- */
+    .featured-cars {
+      background: #f4f7fc;
+    }
     .cars-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -295,14 +312,13 @@
       background: white;
       border-radius: 28px;
       overflow: hidden;
-      transition: all 0.4s;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
       border: 1px solid #eef2f6;
     }
     .car-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-      border-color: #f59e0b;
+      transform: translateY(-10px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
     }
     .car-card img {
       width: 100%;
@@ -312,173 +328,224 @@
     .car-info {
       padding: 1.5rem;
     }
-    .car-info h3 {
-      font-size: 1.4rem;
-      color: #0f172a;
+    .car-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .car-price {
-      color: #f59e0b;
+    .car-title h3 {
+      font-size: 1.4rem;
+    }
+    .badge {
+      background: #fef3e2;
+      color: #f39c12;
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 0.7rem;
       font-weight: 800;
-      font-size: 1.2rem;
+    }
+    .rating {
       margin: 0.5rem 0;
+      color: #f39c12;
+      letter-spacing: 2px;
+    }
+    .rating span {
+      color: #a0aec0;
+      margin-right: 5px;
+    }
+    .price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #f39c12;
+      margin: 0.7rem 0;
+    }
+    .price small {
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+    .free-cancel {
+      font-size: 0.75rem;
+      color: #27ae60;
+      margin-bottom: 1rem;
     }
     .car-actions {
       display: flex;
       gap: 1rem;
-      margin-top: 1rem;
-    }
-    .btn-details, .btn-book {
-      flex: 1;
-      text-align: center;
-      padding: 0.6rem;
-      border-radius: 40px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: 0.2s;
+      margin-top: 0.5rem;
     }
     .btn-details {
-      background: #f1f5f9;
-      color: #334155;
+      flex: 1;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 40px;
+      text-align: center;
+      padding: 0.5rem;
+      text-decoration: none;
+      color: #f39c12;
+      font-weight: 600;
+      transition: 0.2s;
     }
     .btn-details:hover {
-      background: #e2e8f0;
+      background: #fef3e2;
+      border-color: #f39c12;
     }
-    .btn-book {
-      background: #f59e0b;
+    .btn-book-card {
+      flex: 1;
+      background: #f39c12;
+      border-radius: 40px;
+      text-align: center;
+      padding: 0.5rem;
+      text-decoration: none;
       color: white;
+      font-weight: 700;
     }
-    .btn-book:hover {
-      background: #d97706;
+    .btn-book-card:hover {
+      background: #e67e22;
     }
 
-    /* ========== WHY US - Horizontal Scroll ========== */
+    /* ---------- WHY US (white bg) ---------- */
     .why-us {
-      background: #fefce8;
-      padding: 2rem 0 3rem;
-      margin: 2rem 0;
-    }
-    .horizontal-scroll {
-      display: flex;
-      gap: 2rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 1rem 2rem;
-      scrollbar-width: thin;
-    }
-    .horizontal-scroll::-webkit-scrollbar {
-      height: 6px;
-    }
-    .feature-card-h {
-      min-width: 280px;
-      flex: 0 0 auto;
-      scroll-snap-align: start;
       background: white;
-      border-radius: 28px;
-      padding: 2rem;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+    .why-card {
       text-align: center;
-      transition: 0.3s;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
-      border: 1px solid #fde68a;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 24px;
     }
-    .feature-card-h:hover {
-      transform: translateY(-6px);
-      border-color: #f59e0b;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-    }
-    .feature-icon {
-      font-size: 2.8rem;
-      color: #f59e0b;
+    .why-card i {
+      font-size: 2.5rem;
+      color: #f39c12;
       margin-bottom: 1rem;
     }
-    .feature-card-h h4 {
-      font-size: 1.3rem;
-      color: #0f172a;
-      margin-bottom: 0.6rem;
-    }
-    .feature-card-h p {
-      color: #475569;
-      font-size: 0.95rem;
-    }
 
-    /* ========== HOW IT WORKS - Horizontal Scroll ========== */
-    .how-it-works {
-      background: #f0f9ff;
-      padding: 2rem 0 3rem;
+    /* ---------- BOOKING STEPS ---------- */
+    .booking-steps {
+      background: #f4f7fc;
     }
-    .steps-scroll {
-      display: flex;
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 1rem 2rem;
     }
-    .step-card-h {
-      min-width: 260px;
-      flex: 0 0 auto;
-      scroll-snap-align: start;
+    .step-card {
       background: white;
-      border-radius: 28px;
       padding: 2rem;
       text-align: center;
-      transition: 0.3s;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
-      border: 1px solid #bfdbfe;
-    }
-    .step-card-h:hover {
-      transform: translateY(-5px);
-      border-color: #3b82f6;
+      border-radius: 28px;
     }
     .step-number {
-      font-size: 2.6rem;
+      width: 50px;
+      height: 50px;
+      background: #fef3e2;
+      color: #f39c12;
+      font-size: 1.5rem;
       font-weight: 800;
-      color: #3b82f6;
-      opacity: 0.7;
-      margin-bottom: 0.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      border: 2px solid #f39c12;
     }
-    .step-card-h i {
-      font-size: 2.2rem;
-      color: #f59e0b;
-      margin: 0.5rem 0;
+
+    /* ---------- FAQ ACCORDION ---------- */
+    .faq-section {
+      background: white;
     }
-    .step-card-h h4 {
-      font-size: 1.3rem;
-      margin: 0.5rem 0;
+    .faq-grid {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 700;
       color: #0f172a;
     }
-    .step-card-h p {
-      color: #475569;
+    .faq-question i {
+      color: #f39c12;
+      transition: transform 0.3s;
+    }
+    .faq-answer {
+      padding: 0 1.5rem 1.2rem;
+      color: #5a6874;
+      display: none;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
     }
 
-    /* ========== CTA ========== */
-    .cta {
-      background: linear-gradient(135deg, #eef2ff, #ffffff);
-      margin-top: 2rem;
-      padding: 4rem 2rem;
-      text-align: center;
-      border-top: 1px solid #e2e8f0;
-      border-bottom: 1px solid #e2e8f0;
+    /* ---------- CONTACT SECTION ---------- */
+    .contact-section {
+      background: #f4f7fc;
     }
-    .btn-cta {
-      background: #f59e0b;
-      color: white;
-      padding: 14px 36px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 800;
-      display: inline-block;
-      transition: 0.3s;
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
     }
-    .btn-cta:hover {
-      background: #d97706;
-      transform: scale(1.02);
+    .contact-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .info-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .info-card i {
+      font-size: 2rem;
+      color: #f39c12;
+    }
+    .contact-form {
+      flex: 2;
+      background: white;
+      padding: 2rem;
+      border-radius: 28px;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      font-family: 'Cairo', sans-serif;
+    }
+    .form-group textarea {
+      resize: vertical;
     }
 
-    /* ========== FOOTER ========== */
+    /* ---------- FOOTER ---------- */
     .footer {
-      background: #ffffff;
-      padding: 3rem 1rem 1rem;
-      border-top: 1px solid #eef2f6;
-      color: #475569;
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 3rem 0 1rem;
     }
     .footer-container {
       max-width: 1280px;
@@ -486,33 +553,77 @@
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
+      padding: 0 2rem;
     }
     .footer-col {
       flex: 1;
-      min-width: 200px;
+      min-width: 180px;
     }
     .footer-col h4 {
-      color: #1e3a8a;
+      color: white;
       margin-bottom: 1rem;
     }
-    .social-links a {
-      background: #f1f5f9;
-      display: inline-flex;
-      margin-left: 0.8rem;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      align-items: center;
-      justify-content: center;
-      color: #1e3a8a;
+    .footer-col a {
+      color: #cbd5e1;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
       transition: 0.3s;
     }
-    .social-links a:hover {
-      background: #f59e0b;
-      color: white;
+    .footer-col a:hover {
+      color: #f39c12;
+    }
+    .social-icons a {
+      display: inline-block;
+      margin-left: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid #2c3e50;
     }
 
-    @media (max-width: 768px) {
+    /* ---------- FLOATING BUTTONS ---------- */
+    .floating-buttons {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+    }
+    .float-btn {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: #25d366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .float-btn.call {
+      background: #f39c12;
+    }
+    .float-btn.up {
+      background: #2c3e50;
+    }
+    .float-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 992px) {
+      .hero .container { flex-direction: column; text-align: center; }
+      .hero-buttons { justify-content: center; }
       .nav-menu {
         display: none;
         flex-direction: column;
@@ -522,154 +633,206 @@
         left: 0;
         width: 100%;
         padding: 1.5rem;
-        gap: 1.2rem;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       }
-      .nav-menu.active {
-        display: flex;
-      }
-      .nav-toggle {
-        display: block;
-      }
-      .hero-content h1 {
-        font-size: 2.3rem;
-      }
-      .search-card-wrapper {
-        margin-top: -30px;
-      }
-      .container {
-        padding: 2rem 1rem;
-      }
+      .nav-menu.active { display: flex; }
+      .nav-toggle { display: block; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 1rem; }
+      section { padding: 3rem 0; }
+      .section-header h2 { font-size: 2rem; }
+    }
+
+    /* Fade-in animation for cards */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
+<!-- ================= HEADER ================= -->
 <header>
-  <nav class="navbar">
+  <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <div class="logo"><a href="index.html"><i class="fas fa-car"></i> Elite<span>Drive</span></a></div>
+      <div class="logo"><a href="index.html">Elite<span>Drive</span></a></div>
       <div class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></div>
       <ul class="nav-menu" id="navMenu">
-        <li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
-        <li><a href="cars.html"><i class="fas fa-car-side"></i> السيارات</a></li>
-        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
-        <li><a href="contact.html"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
-        <li><a href="booking.html" class="btn-book-nav"><i class="fas fa-calendar-check"></i> احجز الآن</a></li>
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#featured">السيارات</a></li>
+        <li><a href="#offers">العروض</a></li>
+        <li><a href="#contact">اتصل بنا</a></li>
+        <li><a href="booking.html" class="btn-book-nav">احجز الآن</a></li>
       </ul>
     </div>
   </nav>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="hero-content">
-      <h1>سيارات فاخرة <span>بأسلوب عصري</span></h1>
-      <p>أفضل تجربة كراء سيارات في المنطقة – أسعار تنافسية، تأمين شامل، ودعم فوري</p>
-      <a href="booking.html" class="btn-cta-hero">اكتشف العروض <i class="fas fa-arrow-left"></i></a>
-    </div>
-  </section>
-
-  <div class="search-card-wrapper">
-    <div class="search-card">
-      <h3><i class="fas fa-search-location"></i> احجز سيارتك بذكاء</h3>
-      <form id="smartSearchForm">
-        <div class="form-group">
-          <label><i class="fas fa-map-marker-alt"></i> موقع الاستلام</label>
-          <input type="text" list="cities" id="location" placeholder="اختر المدينة" required>
-          <datalist id="cities">
-            <option>الدار البيضاء</option><option>مراكش</option><option>الرباط</option><option>طنجة</option><option>أكادير</option>
-          </datalist>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label><i class="fas fa-calendar-day"></i> تاريخ البداية</label><input type="date" id="startDt" required></div>
-          <div class="form-group"><label><i class="fas fa-calendar-week"></i> تاريخ النهاية</label><input type="date" id="endDt" required></div>
-        </div>
-        <div class="price-estimate" id="priceEstimate">💰 السعر التقديري: سيتم حسابه بعد اختيار التواريخ</div>
-        <button type="submit" class="btn-search">ابحث عن سيارات <i class="fas fa-chevron-circle-left"></i></button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Featured Cars -->
-  <section>
+  <!-- 2. HERO SECTION -->
+  <section class="hero" id="home">
     <div class="container">
-      <div class="section-header"><h2>سيارات <span>مميزة</span></h2><p>أحدث الموديلات بأسعار حصرية</p></div>
-      <div class="cars-grid" id="featuredCarsGrid"></div>
+      <div class="hero-content">
+        <h1>سيارات فاخرة <span>بأفضل الأسعار</span> في المغرب</h1>
+        <p>أكبر تشكيلة من السيارات الفاخرة والرياضية. تأمين شامل، دعم 24/7، وأسعار تنافسية بالدرهم المغربي.</p>
+        <div class="hero-buttons">
+          <a href="#featured" class="btn-primary">استكشف السيارات</a>
+          <a href="booking.html" class="btn-outline">احجز الآن</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&auto=format" alt="سيارة فاخرة">
+      </div>
     </div>
   </section>
 
-  <!-- Why Us - Horizontal Scroll -->
+  <!-- 3. SEARCH SECTION -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-card">
+        <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-search"></i> ابحث عن سيارتك</h3>
+        <form class="search-form" id="searchForm">
+          <div class="input-group"><label>نوع السيارة</label><select><option>جميع الأنواع</option><option>SUV</option><option>سيدان</option><option>فاخرة</option></select></div>
+          <div class="input-group"><label>ناقل الحركة</label><select><option>الكل</option><option>أوتوماتيك</option><option>يدوي</option></select></div>
+          <div class="input-group"><label>عدد المقاعد</label><select><option>4+</option><option>5</option><option>7</option></select></div>
+          <div class="input-group"><label>المدينة</label><select><option>الدار البيضاء</option><option>مراكش</option><option>الرباط</option><option>طنجة</option></select></div>
+          <div class="input-group"><button type="submit" class="btn-search">بحث <i class="fas fa-arrow-left"></i></button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. OFFERS SECTION -->
+  <section class="offers-section" id="offers">
+    <div class="container">
+      <div class="section-header"><h2>عروض <span>خاصة</span></h2></div>
+      <div class="offers-grid">
+        <div class="offer-card fade-up"><div class="offer-icon"><i class="fas fa-tag"></i></div><h3>خصم 20%</h3><p>على الحجوزات لأكثر من 7 أيام</p><a href="booking.html" class="btn-primary" style="padding: 8px 20px;">شاهد العرض</a></div>
+        <div class="offer-card fade-up"><div class="offer-icon"><i class="fas fa-gem"></i></div><h3>سيارات فاخرة</h3><p>مرسيدس، بي إم دبليو، أودي بأسعار مميزة</p><a href="cars.html" class="btn-primary" style="padding: 8px 20px;">استكشف</a></div>
+        <div class="offer-card fade-up"><div class="offer-icon"><i class="fas fa-shield-alt"></i></div><h3>تأمين مجاني</h3><p>تأمين شامل ضد الحوادث بدون رسوم إضافية</p><a href="about.html" class="btn-primary" style="padding: 8px 20px;">اعرف أكثر</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. FEATURED CARS SECTION -->
+  <section class="featured-cars" id="featured">
+    <div class="container">
+      <div class="section-header"><h2>سيارات <span>مميزة</span></h2></div>
+      <div class="cars-grid" id="carsGrid"></div>
+    </div>
+  </section>
+
+  <!-- 6. WHY US SECTION -->
   <section class="why-us">
-    <div class="container" style="padding-bottom: 0;">
-      <div class="section-header"><h2>لماذا <span>نحن</span>؟</h2><p>خدمات تجعل تجربتك استثنائية</p></div>
-      <div class="horizontal-scroll">
-        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h4>تأمين شامل</h4><p>تغطية كاملة ضد الحوادث والسرقة.</p></div>
-        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-headset"></i></div><h4>دعم 24/7</h4><p>فريق متخصص لمساعدتك.</p></div>
-        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-gas-pump"></i></div><h4>وقود مجاني</h4><p>سيارة ممتلئة عند التسليم.</p></div>
-        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div><h4>أرخص الأسعار</h4><p>نضمن أقل سعر في السوق.</p></div>
-        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-road"></i></div><h4>كيلومترات غير محدودة</h4><p>حرية كاملة في القيادة.</p></div>
-        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-calendar-times"></i></div><h4>إلغاء مرن</h4><p>إلغاء مجاني قبل 24 ساعة.</p></div>
+    <div class="container">
+      <div class="section-header"><h2>لماذا <span>نحن</span>؟</h2></div>
+      <div class="why-grid">
+        <div class="why-card fade-up"><i class="fas fa-headset"></i><h4>دعم 24/7</h4><p>فريق متخصص لمساعدتك في أي وقت.</p></div>
+        <div class="why-card fade-up"><i class="fas fa-gas-pump"></i><h4>وقود مجاني</h4><p>سيارة ممتلئة عند التسليم.</p></div>
+        <div class="why-card fade-up"><i class="fas fa-road"></i><h4>كيلومترات غير محدودة</h4><p>بدون قيود.</p></div>
+        <div class="why-card fade-up"><i class="fas fa-calendar-times"></i><h4>إلغاء مجاني</h4><p>قبل 24 ساعة من الاستلام.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works - Horizontal Scroll -->
-  <section class="how-it-works">
-    <div class="container" style="padding-bottom: 0;">
-      <div class="section-header"><h2>خطوات <span>الحجز</span></h2><p>سهل وسريع وآمن</p></div>
-      <div class="steps-scroll">
-        <div class="step-card-h"><div class="step-number">01</div><i class="fas fa-car-side"></i><h4>اختر سيارتك</h4><p>تصفح التشكيلة الفاخرة.</p></div>
-        <div class="step-card-h"><div class="step-number">02</div><i class="fas fa-calendar-check"></i><h4>حدد التواريخ</h4><p>اختر فترة الإيجار المناسبة.</p></div>
-        <div class="step-card-h"><div class="step-number">03</div><i class="fas fa-credit-card"></i><h4>أكمل الدفع</h4><p>استلم سيارتك فوراً.</p></div>
-        <div class="step-card-h"><div class="step-number">04</div><i class="fas fa-smile"></i><h4>استمتع بالرحلة</h4><p>خدمة عملاء على مدار الساعة.</p></div>
+  <!-- 7. BOOKING STEPS SECTION -->
+  <section class="booking-steps">
+    <div class="container">
+      <div class="section-header"><h2>خطوات <span>الحجز</span></h2></div>
+      <div class="steps-grid">
+        <div class="step-card fade-up"><div class="step-number">1</div><h4>اختر السيارة</h4><p>تصفح مجموعتنا الفاخرة</p></div>
+        <div class="step-card fade-up"><div class="step-number">2</div><h4>حدد التواريخ</h4><p>اختر فترة الإيجار المناسبة</p></div>
+        <div class="step-card fade-up"><div class="step-number">3</div><h4>أكمل البيانات</h4><p>أدخل معلوماتك بسهولة</p></div>
+        <div class="step-card fade-up"><div class="step-number">4</div><h4>استلم سيارتك</h4><p>توصيل مجاني إلى موقعك</p></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta">
-    <div class="cta-content">
-      <h2 style="color:#0f172a;">خصم <span style="color:#f59e0b;">20%</span> على الحجوزات الطويلة</h2>
-      <p style="color:#475569;">احجز لمدة 7 أيام أو أكثر واحصل على خصم فوري + توصيل مجاني</p>
-      <a href="booking.html" class="btn-cta">استفد الآن <i class="fas fa-tag"></i></a>
+  <!-- 8. FAQ SECTION -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header"><h2>الأسئلة <span>الشائعة</span></h2></div>
+      <div class="faq-grid">
+        <div class="faq-item"><div class="faq-question">ما هي متطلبات الحجز؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">تحتاج إلى رخصة سيارة سارية المفعول وبطاقة تعريف أو جواز سفر.</div></div>
+        <div class="faq-item"><div class="faq-question">هل يوجد تأمين شامل؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">نعم، جميع سياراتنا مؤمنة تأميناً شاملاً ضد الحوادث والسرقة.</div></div>
+        <div class="faq-item"><div class="faq-question">هل يمكنني إلغاء الحجز؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">نعم، الإلغاء مجاني قبل 24 ساعة من موعد الاستلام.</div></div>
+        <div class="faq-item"><div class="faq-question">ما هي طرق الدفع المتاحة؟ <i class="fas fa-chevron-down"></i></div><div class="faq-answer">الدفع نقداً، بطاقة ائتمان، أو تحويل بنكي.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTACT SECTION -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header"><h2>تواصل <span>معنا</span></h2></div>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <div class="info-card"><i class="fas fa-phone-alt"></i><div><h4>الهاتف</h4><p>+212 5XX 123 456</p></div></div>
+          <div class="info-card"><i class="fas fa-envelope"></i><div><h4>البريد الإلكتروني</h4><p>contact@elitedrive.ma</p></div></div>
+          <div class="info-card"><i class="fas fa-map-marker-alt"></i><div><h4>المقر الرئيسي</h4><p>الدار البيضاء، شارع محمد الخامس</p></div></div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group"><input type="text" placeholder="الاسم الكامل" required></div>
+          <div class="form-group"><input type="email" placeholder="البريد الإلكتروني" required></div>
+          <div class="form-group"><textarea rows="4" placeholder="رسالتك..."></textarea></div>
+          <button type="submit" class="btn-primary">إرسال الرسالة <i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
     </div>
   </section>
 </main>
 
+<!-- 10. FOOTER -->
 <footer class="footer">
   <div class="footer-container">
-    <div class="footer-col"><h3>EliteDrive</h3><p>كراء سيارات فاخرة منذ 2020</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
-    <div class="footer-col"><h4>روابط مهمة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="cars.html">السيارات</a></li><li><a href="about.html">من نحن</a></li></ul></div>
-    <div class="footer-col"><h4>اتصل بنا</h4><p><i class="fas fa-phone"></i> +212 5XX 123 456</p><p><i class="fas fa-envelope"></i> contact@elitedrive.ma</p></div>
+    <div class="footer-col"><h4>EliteDrive</h4><p>كراء سيارات فاخرة منذ 2020. نضمن لكم أفضل تجربة قيادة.</p></div>
+    <div class="footer-col"><h4>روابط سريعة</h4><a href="#home">الرئيسية</a><a href="#featured">السيارات</a><a href="#offers">العروض</a><a href="about.html">من نحن</a></div>
+    <div class="footer-col"><h4>الدعم</h4><a href="contact.html">اتصل بنا</a><a href="faq.html">الأسئلة الشائعة</a><a href="booking.html">الحجز</a></div>
+    <div class="footer-col"><h4>تابعنا</h4><div class="social-icons"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
   </div>
-  <div class="footer-bottom" style="text-align:center; padding:1rem;">© 2025 EliteDrive - جميع الحقوق محفوظة</div>
+  <div class="footer-bottom"><p>© 2025 EliteDrive - جميع الحقوق محفوظة | كراء السيارات بالمغرب</p></div>
 </footer>
 
+<!-- 11. FLOATING BUTTONS -->
+<div class="floating-buttons">
+  <a href="https://wa.me/212612345678" class="float-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="tel:+212512345678" class="float-btn call"><i class="fas fa-phone-alt"></i></a>
+  <div class="float-btn up" id="goToTop"><i class="fas fa-arrow-up"></i></div>
+</div>
+
 <script>
-  // Featured cars data
-  const carsList = [
-    { id:1, name:"Mercedes S-Class", price:120, image:"https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=600" },
-    { id:2, name:"BMW X5", price:85, image:"https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600" },
-    { id:3, name:"Range Rover Velar", price:150, image:"https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=600" },
-    { id:4, name:"Porsche 911", price:250, image:"https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600" }
+  // بيانات السيارات (بالدرهم المغربي)
+  const carsData = [
+    { id:1, name:"Mercedes S-Class", price:1200, rating:4.8, image:"https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=600", badge:"الأكثر طلباً" },
+    { id:2, name:"BMW X5", price:850, rating:4.7, image:"https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600", badge:"" },
+    { id:3, name:"Range Rover Velar", price:1500, rating:4.9, image:"https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=600", badge:"فاخرة" },
+    { id:4, name:"Audi A6", price:700, rating:4.6, image:"https://images.unsplash.com/photo-1606664515524-8b6b4b2e1b5b?w=600", badge:"" }
   ];
 
-  function displayFeatured() {
-    const grid = document.getElementById("featuredCarsGrid");
+  function renderCars() {
+    const grid = document.getElementById("carsGrid");
     if(!grid) return;
     grid.innerHTML = "";
-    carsList.slice(0,4).forEach(car => {
+    carsData.forEach(car => {
       const card = document.createElement("div");
-      card.className = "car-card";
+      card.className = "car-card fade-up";
       card.innerHTML = `
         <img src="${car.image}" alt="${car.name}">
         <div class="car-info">
-          <h3>${car.name}</h3>
-          <div class="car-price">${car.price} $ / اليوم</div>
+          <div class="car-title"><h3>${car.name}</h3>${car.badge ? `<span class="badge">${car.badge}</span>` : ''}</div>
+          <div class="rating">★★★★★ <span>(${car.rating})</span></div>
+          <div class="price">${car.price} درهم <small>/ اليوم</small></div>
+          <div class="free-cancel"><i class="fas fa-check-circle"></i> إلغاء مجاني خلال 24 ساعة</div>
           <div class="car-actions">
             <a href="car-details.html?id=${car.id}" class="btn-details">تفاصيل</a>
-            <a href="booking.html?car=${car.id}" class="btn-book">حجز</a>
+            <a href="booking.html?car=${car.id}" class="btn-book-card">احجز الآن</a>
           </div>
         </div>
       `;
@@ -677,69 +840,70 @@
     });
   }
 
-  // Estimate price
-  const startInput = document.getElementById("startDt");
-  const endInput = document.getElementById("endDt");
-  const priceSpan = document.getElementById("priceEstimate");
-
-  function updateEstimate() {
-    if(startInput.value && endInput.value) {
-      let start = new Date(startInput.value);
-      let end = new Date(endInput.value);
-      if(end > start) {
-        let days = Math.ceil((end - start) / (1000*60*60*24));
-        let avgPrice = 95;
-        let total = days * avgPrice;
-        priceSpan.innerHTML = `💰 السعر التقديري: ${total} $ (${days} أيام) بمعدل 95$/يوم`;
-      } else {
-        priceSpan.innerHTML = "⚠️ الرجاء اختيار تاريخ نهاية بعد البداية";
-      }
-    } else {
-      priceSpan.innerHTML = "💰 السعر التقديري: سيتم حسابه بعد اختيار التواريخ";
-    }
-  }
-  startInput.addEventListener("change", updateEstimate);
-  endInput.addEventListener("change", updateEstimate);
-
-  // Form submit
-  document.getElementById("smartSearchForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const location = document.getElementById("location").value;
-    const start = startInput.value;
-    const end = endInput.value;
-    if(!start || !end) {
-      alert("يرجى إدخال تاريخ البداية والنهاية");
-      return;
-    }
-    if(new Date(start) >= new Date(end)) {
-      alert("تاريخ النهاية يجب أن يكون بعد تاريخ البداية");
-      return;
-    }
-    localStorage.setItem("searchLocation", location);
-    localStorage.setItem("searchStart", start);
-    localStorage.setItem("searchEnd", end);
-    window.location.href = "cars.html";
+  // Accordion FAQ
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const parent = q.parentElement;
+      parent.classList.toggle('active');
+    });
   });
 
-  // Navbar toggle animation
-  const toggleBtn = document.getElementById("navToggle");
-  const menu = document.getElementById("navMenu");
-  if(toggleBtn && menu) {
-    toggleBtn.addEventListener("click", () => {
-      menu.classList.toggle("active");
-      toggleBtn.classList.toggle("active");
-      const icon = toggleBtn.querySelector("i");
-      if(menu.classList.contains("active")) {
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-times");
-      } else {
-        icon.classList.remove("fa-times");
-        icon.classList.add("fa-bars");
+  // Navbar shadow on scroll
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if(window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+    // show/hide goToTop
+    const topBtn = document.getElementById('goToTop');
+    if(window.scrollY > 300) topBtn.style.display = 'flex';
+    else topBtn.style.display = 'none';
+  });
+  document.getElementById('goToTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Mobile nav toggle
+  const toggleBtn = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  toggleBtn?.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('.nav-menu a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target) target.scrollIntoView({ behavior: 'smooth' });
+      navMenu.classList.remove('active');
+    });
+  });
+
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('.fade-up');
+  const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
-  }
+  }, appearOptions);
+  faders.forEach(f => appearOnScroll.observe(f));
 
-  displayFeatured();
+  // Contact form alert
+  document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('تم إرسال رسالتك بنجاح. سيتواصل معك فريق الدعم قريباً.');
+    e.target.reset();
+  });
+
+  renderCars();
+  // manually trigger fade for dynamically added cards after render
+  setTimeout(() => {
+    document.querySelectorAll('.car-card').forEach(c => appearOnScroll.observe(c));
+  }, 100);
 </script>
 </body>
 </html>
