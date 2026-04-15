@@ -1,21 +1,466 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>حجز سيارة | EliteDrive</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"><link rel="stylesheet" href="css/common.css"><link rel="stylesheet" href="css/booking.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="EliteDrive - أكمل حجز سيارتك الفاخرة بسهولة. أدخل بياناتك واختر التواريخ للحصول على السعر النهائي بالدرهم المغربي.">
+  <title>EliteDrive | حجز سيارة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2c7da0;
+      --primary-light: #489fb5;
+      --primary-dark: #1f5e7a;
+      --secondary: #d4a373;
+      --secondary-light: #e0b98c;
+      --secondary-dark: #b8824f;
+      --light-bg: #fefcf5;
+      --light-bg-alt: #f4f2eb;
+      --card-bg: #ffffff;
+      --text-dark: #1e2a3a;
+      --text-muted: #5a6e7c;
+      --text-dim: #8a9aa8;
+      --border-light: #e2e0d8;
+      --border-hover: #d4a373;
+      --radius: 4px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.05);
+      --shadow-md: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--border-light); }
+    ::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 10px; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px;
+      border-radius: 2px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+      text-decoration: none; transition: all 0.3s; border: none;
+    }
+    .btn-gold {
+      background: var(--secondary); color: var(--text-dark);
+    }
+    .btn-gold:hover { background: var(--secondary-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,163,115,0.25); }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--secondary); color: var(--secondary);
+    }
+    .btn-outline:hover { background: rgba(212,163,115,0.08); transform: translateY(-2px); }
+    .btn-block { width: 100%; justify-content: center; }
+
+    /* Navbar */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(254,252,245,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light); transition: all 0.3s;
+    }
+    .navbar.scrolled { background: rgba(254,252,245,0.98); box-shadow: var(--shadow-sm); }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo a {
+      font-size: 1.7rem; font-weight: 900; color: var(--text-dark); text-decoration: none;
+    }
+    .logo span { color: var(--secondary); }
+    .nav-menu {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-menu a {
+      text-decoration: none; color: var(--text-muted); font-weight: 600;
+      transition: 0.3s; position: relative;
+    }
+    .nav-menu a::after {
+      content: ''; position: absolute; bottom: -4px; right: 0;
+      width: 0; height: 1px; background: var(--secondary); transition: width 0.3s;
+    }
+    .nav-menu a:hover, .nav-menu a.active { color: var(--text-dark); }
+    .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
+    .btn-book-nav {
+      background: var(--secondary); color: var(--text-dark) !important;
+      padding: 0.5rem 1.4rem; border-radius: 2px;
+    }
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--border-light);
+      width: 42px; height: 42px; border-radius: var(--radius);
+      font-size: 1.1rem; cursor: pointer; color: var(--text-dark);
+    }
+    .nav-toggle:hover { border-color: var(--secondary); color: var(--secondary); }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--light-bg-alt), var(--light-bg));
+      padding: 3rem 0 2rem; text-align: center;
+    }
+    .page-header h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); }
+    .page-header h1 span { color: var(--secondary); }
+    .page-header p { color: var(--text-muted); margin-top: 0.5rem; }
+
+    /* Booking Form */
+    .booking-section { padding: 3rem 0; }
+    .booking-card {
+      background: var(--card-bg); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 2rem;
+      box-shadow: var(--shadow-sm); max-width: 800px; margin: 0 auto;
+    }
+    .booking-card h2 {
+      font-size: 1.6rem; font-weight: 800; margin-bottom: 1.5rem;
+      color: var(--text-dark); display: flex; align-items: center; gap: 0.8rem;
+    }
+    .booking-card h2 i { color: var(--secondary); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--secondary); margin-bottom: 0.4rem;
+    }
+    .form-group input, .form-group select {
+      width: 100%; padding: 12px 16px; background: var(--light-bg-alt);
+      border: 1px solid var(--border-light); border-radius: var(--radius);
+      font-family: 'Cairo', sans-serif; font-size: 0.9rem;
+      color: var(--text-dark); transition: 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus {
+      outline: none; border-color: var(--secondary);
+    }
+    .error-msg {
+      color: #e74c3c; font-size: 0.7rem; margin-top: 0.3rem; display: none;
+    }
+    .total-price {
+      background: var(--light-bg-alt); padding: 1rem;
+      border-radius: var(--radius); text-align: center;
+      font-size: 1.3rem; font-weight: 800; color: var(--secondary);
+      margin: 1.5rem 0; border: 1px solid var(--border-light);
+    }
+    .total-price span { font-size: 0.9rem; font-weight: normal; color: var(--text-muted); }
+
+    /* Footer */
+    .footer {
+      background: var(--light-bg-alt); border-top: 1px solid var(--border-light);
+      padding: 3rem 0 1.5rem; margin-top: 3rem;
+    }
+    .footer-container {
+      max-width: 1280px; margin: auto; display: flex; flex-wrap: wrap;
+      gap: 2rem; padding: 0 2rem;
+    }
+    .footer-col { flex: 1; min-width: 180px; }
+    .footer-col h3, .footer-col h4 { color: var(--text-dark); margin-bottom: 1rem; }
+    .footer-col a { color: var(--text-dim); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: 0.2s; }
+    .footer-col a:hover { color: var(--secondary); }
+    .social-links { display: flex; gap: 0.8rem; margin-top: 1rem; }
+    .social-links a {
+      width: 36px; height: 36px; background: var(--card-bg);
+      border: 1px solid var(--border-light); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); transition: 0.2s;
+    }
+    .social-links a:hover { background: var(--secondary); color: var(--text-dark); border-color: var(--secondary); }
+    .footer-bottom { text-align: center; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: var(--text-dim); }
+
+    /* Floating Buttons */
+    .floaters {
+      position: fixed; bottom: 25px; left: 25px;
+      display: flex; flex-direction: column; gap: 10px; z-index: 999;
+    }
+    .floater {
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; text-decoration: none; transition: 0.3s;
+      box-shadow: var(--shadow-sm); cursor: pointer; border: none;
+    }
+    .floater-wa { background: #25d366; color: #fff; }
+    .floater-call { background: var(--secondary); color: var(--text-dark); }
+    .floater-top { background: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-light); display: none; }
+    .floater:hover { transform: scale(1.08); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(25px); transition: all 0.6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-menu { display: none; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0;
+        background: var(--card-bg); padding: 1.5rem; gap: 1.2rem; border-bottom: 1px solid var(--border-light); }
+      .nav-menu.open { display: flex; }
+      .nav-toggle { display: flex; align-items: center; justify-content: center; }
+      .container { padding: 0 1.2rem; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .page-header h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
 <body>
-  <nav class="navbar">...</nav>
-  <div class="container booking-wrapper">
-    <h2><i class="fas fa-file-invoice"></i> إتمام الحجز</h2>
-    <form id="bookingForm">
-      <div class="form-row"><div class="form-group"><label>الاسم الكامل</label><input type="text" id="fullName" required placeholder="أحمد محمد"></div><div class="form-group"><label>رقم الهاتف</label><input type="tel" id="phone" required placeholder="+212 6XX XXX XXX"></div></div>
-      <div class="form-group"><label>السيارة المختارة</label><select id="carSelect" required></select></div>
-      <div class="form-row"><div class="form-group"><label>تاريخ البداية</label><input type="date" id="bookStartDate" required></div><div class="form-group"><label>تاريخ النهاية</label><input type="date" id="bookEndDate" required></div></div>
-      <div class="total-price" id="totalPriceDisplay">المبلغ الإجمالي: 0 $</div>
-      <button type="submit" class="btn-primary btn-block">تأكيد الحجز <i class="fas fa-check-circle"></i></button>
-    </form>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">Elite<span>Drive</span></a></div>
+    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="cars.html">السيارات</a></li>
+      <li><a href="about.html">من نحن</a></li>
+      <li><a href="contact.html">اتصل بنا</a></li>
+      <li><a href="booking.html" class="btn-book-nav">احجز الآن</a></li>
+    </ul>
   </div>
-  <footer class="footer">...</footer>
-  <script src="js/data.js"></script>
-  <script src="js/global.js"></script>
-  <script src="js/booking.js"></script>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <h1>أكمل <span>حجزك</span></h1>
+    <p>أدخل بياناتك واختر التواريخ لتأكيد حجز سيارتك الفاخرة</p>
+  </div>
+</section>
+
+<section class="booking-section">
+  <div class="container">
+    <div class="booking-card reveal">
+      <h2><i class="fas fa-file-invoice"></i> إتمام الحجز</h2>
+      <form id="bookingForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>الاسم الكامل</label>
+            <input type="text" id="fullName" placeholder="أحمد محمد" required>
+            <div class="error-msg" id="nameError">الرجاء إدخال الاسم الكامل</div>
+          </div>
+          <div class="form-group">
+            <label>رقم الهاتف</label>
+            <input type="tel" id="phone" placeholder="+212 6XX XXX XXX" required>
+            <div class="error-msg" id="phoneError">الرجاء إدخال رقم هاتف صحيح</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>السيارة المختارة</label>
+          <select id="carSelect" required></select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>تاريخ البداية</label>
+            <input type="date" id="startDate" required>
+          </div>
+          <div class="form-group">
+            <label>تاريخ النهاية</label>
+            <input type="date" id="endDate" required>
+          </div>
+        </div>
+        <div class="total-price" id="totalPriceDisplay">
+          المبلغ الإجمالي: <span id="totalAmount">0</span> درهم
+        </div>
+        <button type="submit" class="btn btn-gold btn-block">تأكيد الحجز <i class="fas fa-check-circle"></i></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>EliteDrive</h3>
+      <p>كراء سيارات فاخرة منذ 2020. نقدم أفضل تجربة قيادة بأحدث الموديلات وأفضل الأسعار بالدرهم المغربي.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <a href="index.html">الرئيسية</a>
+      <a href="cars.html">السيارات</a>
+      <a href="about.html">من نحن</a>
+      <a href="booking.html">الحجز</a>
+    </div>
+    <div class="footer-col">
+      <h4>الدعم</h4>
+      <a href="contact.html">اتصل بنا</a>
+      <a href="#">الأسئلة الشائعة</a>
+      <a href="#">الشروط والأحكام</a>
+    </div>
+    <div class="footer-col">
+      <h4>ساعات العمل</h4>
+      <p>الإثنين – الجمعة: 08:00 – 22:00<br>السبت: 09:00 – 20:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 EliteDrive — جميع الحقوق محفوظة | كراء السيارات الفاخرة بالمغرب · الدرهم المغربي</p>
+  </div>
+</footer>
+
+<div class="floaters">
+  <a href="https://wa.me/212612345678" class="floater floater-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="tel:+212512345678" class="floater floater-call"><i class="fas fa-phone-alt"></i></a>
+  <button class="floater floater-top" id="goTop"><i class="fas fa-arrow-up"></i></button>
+</div>
+
+<script>
+  // قاعدة بيانات السيارات (متطابقة مع باقي الصفحات)
+  const carsDB = [
+    { id: 1, name: "Mercedes-Benz S-Class 450", price: 1200 },
+    { id: 2, name: "BMW X5 xDrive40i", price: 850 },
+    { id: 3, name: "Land Rover Range Rover Velar", price: 1500 },
+    { id: 4, name: "Audi A6 quattro", price: 700 },
+    { id: 5, name: "Porsche Cayenne", price: 1800 },
+    { id: 6, name: "Lexus LS 500", price: 1100 }
+  ];
+
+  // ملء قائمة السيارات في الـ select
+  const carSelect = document.getElementById("carSelect");
+  if (carSelect) {
+    carsDB.forEach(car => {
+      const option = document.createElement("option");
+      option.value = car.id;
+      option.textContent = `${car.name} - ${car.price.toLocaleString()} درهم/اليوم`;
+      carSelect.appendChild(option);
+    });
+  }
+
+  // حساب السعر تلقائياً
+  const startDateInput = document.getElementById("startDate");
+  const endDateInput = document.getElementById("endDate");
+  const totalSpan = document.getElementById("totalAmount");
+
+  function calculateTotal() {
+    if (startDateInput.value && endDateInput.value && carSelect.value) {
+      const start = new Date(startDateInput.value);
+      const end = new Date(endDateInput.value);
+      if (end > start) {
+        const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+        const selectedCar = carsDB.find(c => c.id == carSelect.value);
+        if (selectedCar) {
+          const total = days * selectedCar.price;
+          totalSpan.textContent = total.toLocaleString();
+          return;
+        }
+      }
+    }
+    totalSpan.textContent = "0";
+  }
+
+  startDateInput.addEventListener("change", calculateTotal);
+  endDateInput.addEventListener("change", calculateTotal);
+  carSelect.addEventListener("change", calculateTotal);
+
+  // تعيين الحد الأدنى للتواريخ (اليوم وغداً)
+  const today = new Date().toISOString().split("T")[0];
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
+  startDateInput.min = today;
+  startDateInput.value = today;
+  endDateInput.min = tomorrow;
+  endDateInput.value = tomorrow;
+  calculateTotal();
+
+  // معالجة إرسال النموذج
+  const form = document.getElementById("bookingForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let isValid = true;
+
+    const fullName = document.getElementById("fullName");
+    const phone = document.getElementById("phone");
+    const nameError = document.getElementById("nameError");
+    const phoneError = document.getElementById("phoneError");
+
+    if (!fullName.value.trim()) {
+      nameError.style.display = "block";
+      isValid = false;
+    } else {
+      nameError.style.display = "none";
+    }
+
+    const phonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    if (!phone.value.trim() || !phonePattern.test(phone.value.trim())) {
+      phoneError.style.display = "block";
+      isValid = false;
+    } else {
+      phoneError.style.display = "none";
+    }
+
+    if (!startDateInput.value || !endDateInput.value || new Date(startDateInput.value) >= new Date(endDateInput.value)) {
+      alert("يرجى اختيار تواريخ صحيحة (تاريخ النهاية بعد تاريخ البداية)");
+      isValid = false;
+    }
+
+    if (isValid) {
+      const selectedCar = carsDB.find(c => c.id == carSelect.value);
+      const days = Math.ceil((new Date(endDateInput.value) - new Date(startDateInput.value)) / (1000 * 60 * 60 * 24));
+      const total = days * selectedCar.price;
+
+      const booking = {
+        id: Date.now(),
+        customerName: fullName.value.trim(),
+        phone: phone.value.trim(),
+        carId: selectedCar.id,
+        carName: selectedCar.name,
+        startDate: startDateInput.value,
+        endDate: endDateInput.value,
+        days: days,
+        totalPrice: total,
+        bookingDate: new Date().toISOString()
+      };
+
+      // تخزين في localStorage
+      let bookings = JSON.parse(localStorage.getItem("elite_bookings") || "[]");
+      bookings.push(booking);
+      localStorage.setItem("elite_bookings", JSON.stringify(bookings));
+
+      alert(`تم حجز السيارة ${selectedCar.name} بنجاح!\nالمبلغ الإجمالي: ${total.toLocaleString()} درهم\nسنقوم بالتواصل معك قريباً.`);
+      form.reset();
+      startDateInput.value = today;
+      endDateInput.value = tomorrow;
+      calculateTotal();
+    }
+  });
+
+  // تأثيرات التمرير
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("navbar");
+    if (window.scrollY > 40) navbar.classList.add("scrolled");
+    else navbar.classList.remove("scrolled");
+    const goTop = document.getElementById("goTop");
+    goTop.style.display = window.scrollY > 300 ? "flex" : "none";
+  });
+  document.getElementById("goTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  // قائمة الجوال
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+  navToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
+    const icon = navToggle.querySelector("i");
+    icon.className = navMenu.classList.contains("open") ? "fas fa-times" : "fas fa-bars";
+  });
+
+  // إغلاق القائمة عند النقر على رابط
+  document.querySelectorAll(".nav-menu a").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      navToggle.querySelector("i").className = "fas fa-bars";
+    });
+  });
+
+  // تأثير reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
