@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="EliteDrive - كراء سيارات فاخرة بأسلوب عصري. أسعار تنافسية، تأمين شامل، ودعم 24/7. اختر سيارتك المثالية اليوم.">
-  <meta name="keywords" content="كراء سيارات فاخرة, تأجير, EliteDrive, مرسيدس, بي ام دبليو, بورش, رنج روفر">
+  <meta name="description" content="EliteDrive - كراء سيارات فاخرة بأسلوب عصري. أسعار تنافسية، تأمين شامل، ودعم 24/7.">
+  <meta name="keywords" content="كراء سيارات, تأجير, EliteDrive, مرسيدس, بي ام دبليو">
   <meta name="author" content="EliteDrive">
-  <title>EliteDrive | كراء السيارات الفاخرة</title>
+  <title>EliteDrive | كراء السيارات الفاخرة - الوضع النهاري</title>
   <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/rental-car.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -19,33 +19,35 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #050505;
-      color: #f0f0f0;
+      background-color: #f5f7fc;
+      color: #1f2937;
       overflow-x: hidden;
     }
 
-    /* شريط التمرير المخصص */
+    /* Custom scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #1a1a1a;
+      background: #e4e7eb;
+      border-radius: 10px;
     }
     ::-webkit-scrollbar-thumb {
-      background: #d4af37;
+      background: #3b82f6;
       border-radius: 10px;
     }
 
-    /* Navbar ثابت ومتطور */
+    /* ========== NAVBAR ========== */
     .navbar {
-      background: rgba(5, 5, 5, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
       padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid #eef2f6;
     }
 
     .nav-container {
@@ -57,15 +59,13 @@
     }
 
     .logo a {
-      color: #d4af37;
+      color: #1e3a8a;
       font-size: 1.8rem;
       font-weight: 800;
       text-decoration: none;
-      letter-spacing: -0.5px;
     }
-
     .logo span {
-      color: white;
+      color: #f59e0b;
     }
 
     .nav-menu {
@@ -73,135 +73,111 @@
       gap: 2rem;
       list-style: none;
     }
-
     .nav-menu a {
-      color: #e0e0e0;
+      color: #334155;
       text-decoration: none;
       font-weight: 500;
-      transition: all 0.3s ease;
+      transition: 0.3s;
       display: flex;
       align-items: center;
       gap: 8px;
       position: relative;
     }
-
     .nav-menu a::after {
       content: '';
       position: absolute;
-      bottom: -5px;
+      bottom: -6px;
       left: 0;
       width: 0;
       height: 2px;
-      background: #d4af37;
+      background: #f59e0b;
       transition: width 0.3s;
     }
-
     .nav-menu a:hover::after,
     .nav-menu a.active::after {
       width: 100%;
     }
-
     .nav-menu a:hover,
     .nav-menu a.active {
-      color: #d4af37;
+      color: #f59e0b;
     }
-
     .btn-book-nav {
-      background: #d4af37;
-      color: #050505 !important;
+      background: #f59e0b;
+      color: white !important;
       padding: 0.5rem 1.4rem;
       border-radius: 40px;
       font-weight: 700;
     }
-
-    .btn-book-nav::after {
-      display: none;
-    }
-
+    .btn-book-nav::after { display: none; }
     .btn-book-nav:hover {
-      background: #c4a032;
+      background: #d97706;
       transform: scale(1.02);
     }
-
     .nav-toggle {
       display: none;
       font-size: 1.8rem;
-      color: white;
+      color: #1f2937;
       cursor: pointer;
       transition: transform 0.3s;
     }
-
     .nav-toggle.active {
       transform: rotate(90deg);
     }
 
-    /* Hero Section متطور */
+    /* ========== HERO ========== */
     .hero {
       position: relative;
-      min-height: 90vh;
+      min-height: 85vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: radial-gradient(circle at 20% 30%, rgba(0,0,0,0.9), #020202), url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-      background-blend-mode: overlay;
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+      border-bottom: 1px solid #e2e8f0;
     }
-
     .hero-content {
       max-width: 900px;
       padding: 2rem;
-      animation: fadeInUp 1s ease;
+      animation: fadeUp 0.8s ease;
     }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
     .hero-content h1 {
-      font-size: 4rem;
+      font-size: 3.8rem;
       font-weight: 800;
+      color: #0f172a;
       margin-bottom: 1rem;
-      line-height: 1.2;
     }
-
     .hero-content h1 span {
-      color: #d4af37;
-      text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+      color: #f59e0b;
     }
-
     .hero-content p {
       font-size: 1.2rem;
+      color: #475569;
       margin-bottom: 2rem;
-      opacity: 0.85;
     }
-
     .btn-cta-hero {
-      background: linear-gradient(135deg, #d4af37, #b8932e);
-      color: #050505;
+      background: #f59e0b;
+      color: white;
       padding: 14px 38px;
       border-radius: 50px;
-      font-weight: 800;
+      font-weight: 700;
       text-decoration: none;
       display: inline-block;
       font-size: 1.1rem;
       transition: all 0.3s;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2);
     }
-
     .btn-cta-hero:hover {
+      background: #d97706;
       transform: translateY(-4px);
-      box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 15px 30px rgba(245, 158, 11, 0.3);
     }
 
-    /* Search Card ذكي */
+    /* ========== SEARCH CARD ========== */
     .search-card-wrapper {
       position: relative;
       z-index: 3;
@@ -212,77 +188,66 @@
       margin-left: auto;
       margin-right: auto;
     }
-
     .search-card {
-      background: rgba(15, 15, 15, 0.95);
-      backdrop-filter: blur(10px);
+      background: white;
       border-radius: 32px;
       padding: 2rem;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #eef2f6;
     }
-
     .search-card h3 {
       font-size: 1.6rem;
       margin-bottom: 1.5rem;
-      color: #d4af37;
+      color: #1e3a8a;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
-
     .form-group {
       margin-bottom: 1.2rem;
     }
-
     .form-group label {
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
-      color: #ddd;
+      color: #334155;
     }
-
     .form-group input, .form-group select {
       width: 100%;
       padding: 14px 18px;
-      background: #1e1e1e;
-      border: 1px solid #333;
+      background: #f9fafb;
+      border: 1px solid #e2e8f0;
       border-radius: 20px;
       font-size: 1rem;
-      color: white;
       transition: 0.2s;
+      color: #1f2937;
     }
-
     .form-group input:focus, .form-group select:focus {
       outline: none;
-      border-color: #d4af37;
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
     }
-
     .form-row {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
     }
-
     .form-row .form-group {
       flex: 1;
     }
-
     .price-estimate {
-      background: #0a0a0a;
+      background: #fef9e8;
       padding: 12px;
       border-radius: 20px;
       text-align: center;
       margin: 15px 0;
       font-weight: bold;
-      color: #d4af37;
-      font-size: 1.1rem;
+      color: #b45309;
+      font-size: 1rem;
     }
-
     .btn-search {
-      background: #d4af37;
-      color: #050505;
+      background: #f59e0b;
+      color: white;
       border: none;
       width: 100%;
       padding: 14px;
@@ -291,117 +256,107 @@
       font-size: 1.1rem;
       cursor: pointer;
       transition: 0.3s;
-      margin-top: 10px;
     }
-
     .btn-search:hover {
-      background: #c4a032;
+      background: #d97706;
       transform: scale(1.01);
     }
 
-    /* Featured Cars */
+    /* ========== CONTAINER & SECTIONS ========== */
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 3rem 2rem;
     }
-
     .section-header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
-
     .section-header h2 {
-      font-size: 2.6rem;
+      font-size: 2.4rem;
       font-weight: 800;
+      color: #0f172a;
     }
-
     .section-header h2 span {
-      color: #d4af37;
+      color: #f59e0b;
+    }
+    .section-header p {
+      color: #64748b;
+      font-size: 1.1rem;
     }
 
+    /* ========== CARS GRID ========== */
     .cars-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 2rem;
     }
-
     .car-card {
-      background: #111111;
+      background: white;
       border-radius: 28px;
       overflow: hidden;
       transition: all 0.4s;
-      border: 1px solid #222;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eef2f6;
     }
-
     .car-card:hover {
-      transform: translateY(-12px);
-      border-color: #d4af37;
-      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+      border-color: #f59e0b;
     }
-
     .car-card img {
       width: 100%;
-      height: 220px;
+      height: 210px;
       object-fit: cover;
     }
-
     .car-info {
       padding: 1.5rem;
     }
-
     .car-info h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+      color: #0f172a;
     }
-
     .car-price {
-      color: #d4af37;
+      color: #f59e0b;
       font-weight: 800;
-      font-size: 1.3rem;
-      margin: 0.7rem 0;
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
     }
-
     .car-actions {
       display: flex;
       gap: 1rem;
       margin-top: 1rem;
     }
-
     .btn-details, .btn-book {
       flex: 1;
       text-align: center;
-      padding: 0.7rem;
+      padding: 0.6rem;
       border-radius: 40px;
       text-decoration: none;
       font-weight: 700;
       transition: 0.2s;
     }
-
     .btn-details {
-      background: #222;
-      color: #eee;
+      background: #f1f5f9;
+      color: #334155;
     }
-
     .btn-details:hover {
-      background: #333;
+      background: #e2e8f0;
     }
-
     .btn-book {
-      background: #d4af37;
-      color: #050505;
+      background: #f59e0b;
+      color: white;
     }
-
     .btn-book:hover {
-      background: #c4a032;
+      background: #d97706;
     }
 
-    /* Why Us - Horizontal Scroll */
+    /* ========== WHY US - Horizontal Scroll ========== */
     .why-us {
-      background: #080808;
-      padding: 2rem 0 4rem;
+      background: #fefce8;
+      padding: 2rem 0 3rem;
+      margin: 2rem 0;
     }
-
     .horizontal-scroll {
       display: flex;
       gap: 2rem;
@@ -410,73 +365,102 @@
       padding: 1rem 2rem;
       scrollbar-width: thin;
     }
-
     .horizontal-scroll::-webkit-scrollbar {
-      height: 5px;
+      height: 6px;
     }
-
     .feature-card-h {
       min-width: 280px;
       flex: 0 0 auto;
       scroll-snap-align: start;
-      background: #121212;
-      border-radius: 32px;
+      background: white;
+      border-radius: 28px;
       padding: 2rem;
       text-align: center;
       transition: 0.3s;
-      border: 1px solid #222;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+      border: 1px solid #fde68a;
     }
-
     .feature-card-h:hover {
-      transform: scale(1.02);
-      border-color: #d4af37;
+      transform: translateY(-6px);
+      border-color: #f59e0b;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
     }
-
     .feature-icon {
-      font-size: 3rem;
-      color: #d4af37;
+      font-size: 2.8rem;
+      color: #f59e0b;
       margin-bottom: 1rem;
     }
-
     .feature-card-h h4 {
-      font-size: 1.4rem;
-      margin-bottom: 0.7rem;
+      font-size: 1.3rem;
+      color: #0f172a;
+      margin-bottom: 0.6rem;
+    }
+    .feature-card-h p {
+      color: #475569;
+      font-size: 0.95rem;
     }
 
-    /* How It Works */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* ========== HOW IT WORKS - Horizontal Scroll ========== */
+    .how-it-works {
+      background: #f0f9ff;
+      padding: 2rem 0 3rem;
+    }
+    .steps-scroll {
+      display: flex;
       gap: 2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 1rem 2rem;
     }
-
-    .step-card {
-      background: #111;
-      padding: 2rem;
+    .step-card-h {
+      min-width: 260px;
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      background: white;
       border-radius: 28px;
+      padding: 2rem;
       text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+      border: 1px solid #bfdbfe;
     }
-
+    .step-card-h:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+    }
     .step-number {
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       font-weight: 800;
-      color: #d4af37;
-      opacity: 0.6;
+      color: #3b82f6;
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+    .step-card-h i {
+      font-size: 2.2rem;
+      color: #f59e0b;
+      margin: 0.5rem 0;
+    }
+    .step-card-h h4 {
+      font-size: 1.3rem;
+      margin: 0.5rem 0;
+      color: #0f172a;
+    }
+    .step-card-h p {
+      color: #475569;
     }
 
-    /* CTA */
+    /* ========== CTA ========== */
     .cta {
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-      margin-top: 3rem;
-      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #eef2ff, #ffffff);
+      margin-top: 2rem;
+      padding: 4rem 2rem;
       text-align: center;
-      border-top: 1px solid #d4af37;
-      border-bottom: 1px solid #d4af37;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
     }
-
     .btn-cta {
-      background: #d4af37;
-      color: #050505;
+      background: #f59e0b;
+      color: white;
       padding: 14px 36px;
       border-radius: 50px;
       text-decoration: none;
@@ -484,13 +468,18 @@
       display: inline-block;
       transition: 0.3s;
     }
-
-    /* Footer */
-    .footer {
-      background: #050505;
-      padding: 3rem 1rem 1rem;
+    .btn-cta:hover {
+      background: #d97706;
+      transform: scale(1.02);
     }
 
+    /* ========== FOOTER ========== */
+    .footer {
+      background: #ffffff;
+      padding: 3rem 1rem 1rem;
+      border-top: 1px solid #eef2f6;
+      color: #475569;
+    }
     .footer-container {
       max-width: 1280px;
       margin: auto;
@@ -498,46 +487,43 @@
       flex-wrap: wrap;
       gap: 2rem;
     }
-
     .footer-col {
       flex: 1;
       min-width: 200px;
     }
-
     .footer-col h4 {
-      color: #d4af37;
+      color: #1e3a8a;
       margin-bottom: 1rem;
     }
-
     .social-links a {
-      background: #1a1a1a;
+      background: #f1f5f9;
       display: inline-flex;
       margin-left: 0.8rem;
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       align-items: center;
       justify-content: center;
+      color: #1e3a8a;
       transition: 0.3s;
     }
-
     .social-links a:hover {
-      background: #d4af37;
-      color: black;
+      background: #f59e0b;
+      color: white;
     }
 
     @media (max-width: 768px) {
       .nav-menu {
         display: none;
         flex-direction: column;
-        background: rgba(5,5,5,0.98);
-        backdrop-filter: blur(12px);
+        background: white;
         position: absolute;
         top: 70px;
         left: 0;
         width: 100%;
-        padding: 2rem;
-        gap: 1.5rem;
+        padding: 1.5rem;
+        gap: 1.2rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       }
       .nav-menu.active {
         display: flex;
@@ -550,6 +536,9 @@
       }
       .search-card-wrapper {
         margin-top: -30px;
+      }
+      .container {
+        padding: 2rem 1rem;
       }
     }
   </style>
@@ -575,8 +564,8 @@
 <main>
   <section class="hero">
     <div class="hero-content">
-      <h1>سيارات فاخرة <span>لأقصى تجربة</span></h1>
-      <p>قيادة لا تُنسى مع EliteDrive – تشكيلة حصرية بأفضل الأسعار وخدمة راقية</p>
+      <h1>سيارات فاخرة <span>بأسلوب عصري</span></h1>
+      <p>أفضل تجربة كراء سيارات في المنطقة – أسعار تنافسية، تأمين شامل، ودعم فوري</p>
       <a href="booking.html" class="btn-cta-hero">اكتشف العروض <i class="fas fa-arrow-left"></i></a>
     </div>
   </section>
@@ -602,6 +591,7 @@
     </div>
   </div>
 
+  <!-- Featured Cars -->
   <section>
     <div class="container">
       <div class="section-header"><h2>سيارات <span>مميزة</span></h2><p>أحدث الموديلات بأسعار حصرية</p></div>
@@ -609,12 +599,13 @@
     </div>
   </section>
 
+  <!-- Why Us - Horizontal Scroll -->
   <section class="why-us">
-    <div class="container">
-      <div class="section-header"><h2>لماذا <span>نحن</span>؟</h2><p>خدمات تجعل تجربتك فاخرة</p></div>
+    <div class="container" style="padding-bottom: 0;">
+      <div class="section-header"><h2>لماذا <span>نحن</span>؟</h2><p>خدمات تجعل تجربتك استثنائية</p></div>
       <div class="horizontal-scroll">
-        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h4>تأمين فاخر</h4><p>تغطية شاملة ضد أي ضرر.</p></div>
-        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-headset"></i></div><h4>دعم 24/7 VIP</h4><p>فريق خاص لخدمتك.</p></div>
+        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h4>تأمين شامل</h4><p>تغطية كاملة ضد الحوادث والسرقة.</p></div>
+        <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-headset"></i></div><h4>دعم 24/7</h4><p>فريق متخصص لمساعدتك.</p></div>
         <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-gas-pump"></i></div><h4>وقود مجاني</h4><p>سيارة ممتلئة عند التسليم.</p></div>
         <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div><h4>أرخص الأسعار</h4><p>نضمن أقل سعر في السوق.</p></div>
         <div class="feature-card-h"><div class="feature-icon"><i class="fas fa-road"></i></div><h4>كيلومترات غير محدودة</h4><p>حرية كاملة في القيادة.</p></div>
@@ -623,21 +614,24 @@
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <div class="section-header"><h2>خطوات <span>الحجز</span></h2><p>سهل وسريع</p></div>
-      <div class="steps-grid">
-        <div class="step-card"><div class="step-number">01</div><i class="fas fa-car-side fa-2x"></i><h4>اختر سيارتك</h4><p>تصفح التشكيلة الفاخرة.</p></div>
-        <div class="step-card"><div class="step-number">02</div><i class="fas fa-calendar-check fa-2x"></i><h4>حدد التواريخ</h4><p>اختر فترة الإيجار المناسبة.</p></div>
-        <div class="step-card"><div class="step-number">03</div><i class="fas fa-credit-card fa-2x"></i><h4>أكمل الدفع</h4><p>استلم سيارتك فوراً.</p></div>
+  <!-- How It Works - Horizontal Scroll -->
+  <section class="how-it-works">
+    <div class="container" style="padding-bottom: 0;">
+      <div class="section-header"><h2>خطوات <span>الحجز</span></h2><p>سهل وسريع وآمن</p></div>
+      <div class="steps-scroll">
+        <div class="step-card-h"><div class="step-number">01</div><i class="fas fa-car-side"></i><h4>اختر سيارتك</h4><p>تصفح التشكيلة الفاخرة.</p></div>
+        <div class="step-card-h"><div class="step-number">02</div><i class="fas fa-calendar-check"></i><h4>حدد التواريخ</h4><p>اختر فترة الإيجار المناسبة.</p></div>
+        <div class="step-card-h"><div class="step-number">03</div><i class="fas fa-credit-card"></i><h4>أكمل الدفع</h4><p>استلم سيارتك فوراً.</p></div>
+        <div class="step-card-h"><div class="step-number">04</div><i class="fas fa-smile"></i><h4>استمتع بالرحلة</h4><p>خدمة عملاء على مدار الساعة.</p></div>
       </div>
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="cta">
     <div class="cta-content">
-      <h2>خصم <span>20%</span> على الحجوزات الطويلة</h2>
-      <p>احجز لمدة 7 أيام أو أكثر واحصل على خصم فوري + توصيل مجاني</p>
+      <h2 style="color:#0f172a;">خصم <span style="color:#f59e0b;">20%</span> على الحجوزات الطويلة</h2>
+      <p style="color:#475569;">احجز لمدة 7 أيام أو أكثر واحصل على خصم فوري + توصيل مجاني</p>
       <a href="booking.html" class="btn-cta">استفد الآن <i class="fas fa-tag"></i></a>
     </div>
   </section>
@@ -646,25 +640,26 @@
 <footer class="footer">
   <div class="footer-container">
     <div class="footer-col"><h3>EliteDrive</h3><p>كراء سيارات فاخرة منذ 2020</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
-    <div class="footer-col"><h4>روابط</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="cars.html">السيارات</a></li><li><a href="about.html">من نحن</a></li></ul></div>
+    <div class="footer-col"><h4>روابط مهمة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="cars.html">السيارات</a></li><li><a href="about.html">من نحن</a></li></ul></div>
     <div class="footer-col"><h4>اتصل بنا</h4><p><i class="fas fa-phone"></i> +212 5XX 123 456</p><p><i class="fas fa-envelope"></i> contact@elitedrive.ma</p></div>
   </div>
   <div class="footer-bottom" style="text-align:center; padding:1rem;">© 2025 EliteDrive - جميع الحقوق محفوظة</div>
 </footer>
 
 <script>
-  // بيانات السيارات
+  // Featured cars data
   const carsList = [
     { id:1, name:"Mercedes S-Class", price:120, image:"https://images.unsplash.com/photo-1626668893636-6e8edf49e5c5?w=600" },
     { id:2, name:"BMW X5", price:85, image:"https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600" },
-    { id:3, name:"Range Rover Velar", price:150, image:"https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=600" }
+    { id:3, name:"Range Rover Velar", price:150, image:"https://images.unsplash.com/photo-1602584386578-e63e3a3b3b5f?w=600" },
+    { id:4, name:"Porsche 911", price:250, image:"https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600" }
   ];
 
   function displayFeatured() {
     const grid = document.getElementById("featuredCarsGrid");
     if(!grid) return;
     grid.innerHTML = "";
-    carsList.forEach(car => {
+    carsList.slice(0,4).forEach(car => {
       const card = document.createElement("div");
       card.className = "car-card";
       card.innerHTML = `
@@ -682,7 +677,7 @@
     });
   }
 
-  // البحث الذكي مع حساب السعر التقديري
+  // Estimate price
   const startInput = document.getElementById("startDt");
   const endInput = document.getElementById("endDt");
   const priceSpan = document.getElementById("priceEstimate");
@@ -693,9 +688,9 @@
       let end = new Date(endInput.value);
       if(end > start) {
         let days = Math.ceil((end - start) / (1000*60*60*24));
-        let avgPrice = 100; // متوسط سعر يومي
+        let avgPrice = 95;
         let total = days * avgPrice;
-        priceSpan.innerHTML = `💰 السعر التقديري: ${total} $ (${days} أيام) بمعدل 100$/يوم`;
+        priceSpan.innerHTML = `💰 السعر التقديري: ${total} $ (${days} أيام) بمعدل 95$/يوم`;
       } else {
         priceSpan.innerHTML = "⚠️ الرجاء اختيار تاريخ نهاية بعد البداية";
       }
@@ -703,11 +698,10 @@
       priceSpan.innerHTML = "💰 السعر التقديري: سيتم حسابه بعد اختيار التواريخ";
     }
   }
-
   startInput.addEventListener("change", updateEstimate);
   endInput.addEventListener("change", updateEstimate);
 
-  // معالجة نموذج البحث
+  // Form submit
   document.getElementById("smartSearchForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
     const location = document.getElementById("location").value;
@@ -727,7 +721,7 @@
     window.location.href = "cars.html";
   });
 
-  // Navbar toggle مع أنيميشن
+  // Navbar toggle animation
   const toggleBtn = document.getElementById("navToggle");
   const menu = document.getElementById("navMenu");
   if(toggleBtn && menu) {
